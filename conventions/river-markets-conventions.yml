@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.rivermarkets.com
+derived_from: openapi/river-markets-openapi-original.json
+summary: >-
+  Cross-cutting request/response semantics for the River Markets REST + WebSocket API,
+  captured from the docs and derived from the OpenAPI.
+authentication:
+  style: ed25519-request-signing
+  headers: [X-River-Key-Id, X-River-Timestamp, X-River-Signature]
+  bearer: JWT BearerAuth for the web client
+  docs: https://docs.rivermarkets.com/api-reference/authentication
+  cross_ref: authentication/river-markets-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    No Idempotency-Key header or idempotent-create contract is documented on the REST
+    write operations. Replay protection exists at the auth layer (each Ed25519 signature
+    is deduped in Redis for 60s), but that is anti-replay, not request idempotency, so no
+    Idempotency pointer is emitted. Orders carry an exchange-assigned client_order_id on
+    read models but OrderCreate does not accept a client-supplied idempotency token.
+pagination:
+  style: offset-limit
+  params: [limit, offset]
+  notes: List endpoints (orders, fills, positions, markets/search, complex-orders) accept limit and offset query parameters.
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /v1
+  base_url: https://api.rivermarkets.com/v1
+identifiers:
+  river_id: Unified cross-exchange market identifier; use it everywhere in place of exchange-native tickers/slugs.
+  subaccount_id: Isolated trading container; most write operations are scoped to a subaccount.
+  notes: Search/lookup returns both the exchange-native id (Kalshi ticker, Polymarket slug) and the River ID.
+error_envelope:
+  shape: fastapi-validation
+  primary_status: 422
+  media_type: application/json
+  schema: HTTPValidationError (detail[] of {loc, msg, type})
+  cross_ref: errors/river-markets-problem-types.yml
+rate_limiting:
+  standard: 10 requests/second
+  premium: contact support
+  docs: https://docs.rivermarkets.com/api-reference/overview
+timestamps:
+  format: ISO 8601 (UTC); Unix timestamps in seconds where noted
+streaming:
+  transport: WebSocket
+  channels: [fills, orderbooks, orders, tradeprints]
+  auth: Ed25519-signed handshake
+  cross_ref: asyncapi/river-markets-streaming-asyncapi.yml
+security_model:
+  row_level_security: Every table enforces Postgres RLS scoped to the authenticated user.
+  exchange_credentials: Encrypted at rest with asymmetric encryption; never returned by any endpoint; deleted with the subaccount.
+  transport: TLS on REST, WebSocket, and database connections.

@@ -1,7 +1,15 @@
 aid: river-markets
 name: River Markets
-description: River Markets is a company surfaced as a portfolio company of y-combinator and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  River Markets is a unified prime brokerage for prediction markets, consolidating multiple
+  exchanges — Kalshi, Polymarket, and Polymarket US (with Novig and Rothera planned) — behind a
+  single account, order-management system, and REST + WebSocket API. Every contract across all
+  venues is assigned a unified River ID, so professional and institutional traders can search
+  markets, place and route orders (including icebergs, pegs, stop-losses, and take-profits with
+  smart order routing), track positions and P&L across isolated subaccounts, and stream live
+  fills, orderbooks, orders, and trade prints from one integration. Requests are Ed25519-signed
+  so the private key never leaves the client process. Founded by ex-BlackRock and high-frequency
+  trading quants and backed by Y Combinator (Spring 2026).
 url: https://raw.githubusercontent.com/api-evangelist/river-markets/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -9,14 +17,297 @@ x-backed-by:
 - y-combinator
 x-tier: stub
 x-tier-reason: portfolio-lead
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 17
+  pass: local-v1
+image: https://rivermarkets.com/favicon.ico
 tags:
 - Company
-apis: []
+- Prediction Markets
+- Trading
+- Prime Brokerage
+- Financial Services
+- Order Management
+- Market Data
+- WebSocket
+- Fintech
+apis:
+- aid: river-markets:river-markets-balance-api
+  name: River Markets balance API
+  description: The balance API from River Markets — 1 operation(s) for balance.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - balance
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-balance-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-complex-orders-api
+  name: River Markets complex-orders API
+  description: >-
+    Manage complex orders: conditional orders (take-profit and stop-loss), TWAP, and other advanced order
+    types.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - complex-orders
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-complex-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-fair-values-api
+  name: River Markets fair-values API
+  description: The fair-values API from River Markets — 2 operation(s) for fair-values.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - fair-values
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-fair-values-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-fills-api
+  name: River Markets fills API
+  description: Retrieve trade execution history and fill details.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - fills
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-fills-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-generic-assets-api
+  name: River Markets generic-assets API
+  description: The generic-assets API from River Markets — 3 operation(s) for generic-assets.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - generic-assets
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-generic-assets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-markets-api
+  name: River Markets markets API
+  description: Search and discover prediction markets across Kalshi and Polymarket.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - markets
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-markets-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-orderbooks-api
+  name: River Markets orderbooks API
+  description: The orderbooks API from River Markets — 2 operation(s) for orderbooks.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - orderbooks
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-orderbooks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-orders-api
+  name: River Markets orders API
+  description: Place and manage orders on prediction market exchanges.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - orders
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-orders-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-positions-api
+  name: River Markets positions API
+  description: View current portfolio positions across all connected exchanges.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - positions
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-positions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-prices-api
+  name: River Markets prices API
+  description: Get historical price data and candlesticks from exchanges.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - prices
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-prices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-subaccounts-api
+  name: River Markets subaccounts API
+  description: >-
+    Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - subaccounts
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-subaccounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-tradeprints-api
+  name: River Markets tradeprints API
+  description: >-
+    Recent trades for a market. Pairs with the /v1/ws/tradeprints WebSocket for live updates.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - tradeprints
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-tradeprints-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-watchlists-api
+  name: River Markets watchlists API
+  description: The watchlists API from River Markets — 4 operation(s) for watchlists.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - watchlists
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-watchlists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: DeveloperPortal
+  url: https://docs.rivermarkets.com
+- type: Documentation
+  url: https://docs.rivermarkets.com
+- type: APIReference
+  url: https://docs.rivermarkets.com/api-reference/overview
+- type: GettingStarted
+  url: https://docs.rivermarkets.com/quickstart
+- type: SignUp
+  url: https://app.rivermarkets.com
+- type: GitHubOrganization
+  url: https://github.com/rivermarkets
+- type: OpenAPI
+  url: openapi/river-markets-openapi-original.json
+- type: Authentication
+  url: authentication/river-markets-authentication.yml
+- type: DomainSecurity
+  url: security/river-markets-domain-security.yml
+- type: LLMsTxt
+  url: llms/river-markets-llms.txt
+- type: Packages
+  url: packages/river-markets-packages.yml
+- type: SDKs
+  url: packages/river-markets-packages.yml
+- type: Conventions
+  url: conventions/river-markets-conventions.yml
+- type: ErrorCatalog
+  url: errors/river-markets-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/river-markets-lifecycle.yml
+- type: Conformance
+  url: conformance/river-markets-conformance.yml
+- type: DataModel
+  url: data-model/river-markets-data-model.yml
+- type: MCPServer
+  url: mcp/river-markets-mcp.yml
+- type: Overlay
+  url: overlays/river-markets-openapi-overlay.yaml
+- type: AgenticAccess
+  url: agentic-access/river-markets-agentic-access.yml
+- type: AsyncAPI
+  url: asyncapi/river-markets-streaming-asyncapi.yml
+- type: AgentSkill
+  url: skills/_index.yml

@@ -1,0 +1,61 @@
+# River Markets
+
+## Docs
+
+- [Authentication](https://docs.rivermarkets.com/api-reference/authentication.md): How to authenticate with the River Markets API
+- [Get Exchange Balance](https://docs.rivermarkets.com/api-reference/balance/get-exchange-balance.md): Return live exchange balances (Kalshi, Polymarket) for a non-custodial subaccount.
+- [Cancel All Complex Orders](https://docs.rivermarkets.com/api-reference/complex-orders/cancel-all-complex-orders.md): Cancel all cancellable complex orders (conditional and iceberg) for a subaccount.
+- [Cancel Complex Order](https://docs.rivermarkets.com/api-reference/complex-orders/cancel-complex-order.md): Cancel a single complex order (conditional or iceberg).
+- [Create Complex Order](https://docs.rivermarkets.com/api-reference/complex-orders/create-complex-order.md): Create a new complex order (conditional or iceberg).
+- [Get Complex Order](https://docs.rivermarkets.com/api-reference/complex-orders/get-complex-order.md): Get a single complex order by ID (conditional or iceberg).
+- [List Complex Orders](https://docs.rivermarkets.com/api-reference/complex-orders/list-complex-orders.md): List complex orders (conditional and iceberg) with optional filters.
+- [Delete Fair Value](https://docs.rivermarkets.com/api-reference/fair-values/delete-fair-value.md): Clear the fair value for an instrument on a subaccount.
+- [List Fair Values](https://docs.rivermarkets.com/api-reference/fair-values/list-fair-values.md): List the caller's fair values, optionally scoped to one subaccount and/or one instrument.
+- [Set Fair Value](https://docs.rivermarkets.com/api-reference/fair-values/set-fair-value.md): Set the fair value for an instrument on a subaccount (insert-or-overwrite).
+- [Get Fills](https://docs.rivermarkets.com/api-reference/fills/get-fills.md): Fetch fills/trades for the user's subaccounts.
+- [Add Generic Asset Members](https://docs.rivermarkets.com/api-reference/generic-assets/add-generic-asset-members.md): Add river_ids to a user-owned generic asset.
+- [Create Generic Asset](https://docs.rivermarkets.com/api-reference/generic-assets/create-generic-asset.md): Create a new user-owned generic asset (basket).
+- [Delete Generic Asset](https://docs.rivermarkets.com/api-reference/generic-assets/delete-generic-asset.md): Delete a user-owned generic asset (cascades to members).
+- [Get Generic Asset](https://docs.rivermarkets.com/api-reference/generic-assets/get-generic-asset.md): Fetch a single generic asset (own or public-approved) with its resolved member markets.
+- [List Generic Assets](https://docs.rivermarkets.com/api-reference/generic-assets/list-generic-assets.md): List generic assets visible to the caller (their own + platform-curated approved).
+- [Remove Generic Asset Members](https://docs.rivermarkets.com/api-reference/generic-assets/remove-generic-asset-members.md): Remove river_ids from a user-owned generic asset.
+- [Update Generic Asset](https://docs.rivermarkets.com/api-reference/generic-assets/update-generic-asset.md): Update a user-owned generic asset's name or description. Platform-curated assets cannot be edited via this route.
+- [Lookup Markets](https://docs.rivermarkets.com/api-reference/markets/lookup-markets.md): Batch lookup markets by river_ids.
+- [Match Market](https://docs.rivermarkets.com/api-reference/markets/match-market.md): Exact match a single market by Kalshi ticker or Polymarket slug. Supply exactly one.
+- [Match Markets Batch](https://docs.rivermarkets.com/api-reference/markets/match-markets-batch.md): Batch-resolve many markets by exact Kalshi ticker and/or Polymarket slug in one request.
+- [Search Markets](https://docs.rivermarkets.com/api-reference/markets/search-markets.md): Search and browse markets across all exchanges.
+- [Get Orderbook](https://docs.rivermarkets.com/api-reference/orderbooks/get-orderbook.md): Get orderbook for a river_id.
+- [Cancel All Orders](https://docs.rivermarkets.com/api-reference/orders/cancel-all-orders.md): Cancel all open orders for a subaccount.
+- [Cancel Order](https://docs.rivermarkets.com/api-reference/orders/cancel-order.md): Cancel an existing order.
+- [Create Order](https://docs.rivermarkets.com/api-reference/orders/create-order.md): Place a new order.
+- [Edit Order](https://docs.rivermarkets.com/api-reference/orders/edit-order.md): Edit (amend) a resting simple limit order.
+- [Get Order](https://docs.rivermarkets.com/api-reference/orders/get-order.md): Get a single order by ID with its fills.
+- [Get Order Queue Position](https://docs.rivermarkets.com/api-reference/orders/get-order-queue-position.md): Get the best (minimum) queue position across all exchange orders backing this river order.
+- [List Orders](https://docs.rivermarkets.com/api-reference/orders/list-orders.md): List orders with optional filters.
+- [API Overview](https://docs.rivermarkets.com/api-reference/overview.md): River Markets REST API
+- [Get Positions](https://docs.rivermarkets.com/api-reference/positions/get-positions.md): Fetch positions for user's subaccounts.
+- [Get Prices](https://docs.rivermarkets.com/api-reference/prices/get-prices.md): Get price data for a market. Returns either candlestick OHLC data or simple price history based on the `type` parameter. The endpoint automatically determines the exchange and fetches data accordingly.
+- [Create Subaccount](https://docs.rivermarkets.com/api-reference/subaccounts/create-subaccount.md): Create a new trading subaccount for the authenticated user.
+- [Delete Subaccount](https://docs.rivermarkets.com/api-reference/subaccounts/delete-subaccount.md): Delete a subaccount. Custodial subaccounts cannot be deleted.
+- [Get Subaccount](https://docs.rivermarkets.com/api-reference/subaccounts/get-subaccount.md): Fetch configuration and metadata for a specific subaccount.
+- [List Subaccounts](https://docs.rivermarkets.com/api-reference/subaccounts/list-subaccounts.md): Enumerate all trading subaccounts accessible to the user.
+- [Update Subaccount](https://docs.rivermarkets.com/api-reference/subaccounts/update-subaccount.md): Update an existing subaccount.
+- [Get Tradeprints](https://docs.rivermarkets.com/api-reference/tradeprints/get-tradeprints.md): Return the most recent trades for one or more markets, sourced directly from the exchanges. Markets are fetched concurrently with a small semaphore (`MAX_CONCURRENT_FETCHES`) so a long input list never fans out into a thundering herd, and the result list preserves the input order. A failure on any s…
+- [Supported Exchanges](https://docs.rivermarkets.com/concepts/exchanges.md): Exchanges available through River Markets
+- [Order Types](https://docs.rivermarkets.com/concepts/order-types.md): Complete guide to all order types available on River Markets
+- [Orders](https://docs.rivermarkets.com/concepts/orders.md): Understanding order lifecycle and statuses on River Markets
+- [River IDs](https://docs.rivermarkets.com/concepts/river-ids.md): Every market across all exchanges is assigned a unique **River ID** — a unified identifier that works across the entire platform.
+- [Security](https://docs.rivermarkets.com/concepts/security.md): How River Markets protects your account, credentials, and data.
+- [Subaccounts](https://docs.rivermarkets.com/concepts/subaccounts.md): Subaccounts let you organize your trading activity into separate containers.:
+- [Introduction](https://docs.rivermarkets.com/introduction.md): Unified prime brokerage for prediction markets
+- [Quickstart](https://docs.rivermarkets.com/quickstart.md): Get up and running with River Markets in 5 minutes
+- [Python SDK](https://docs.rivermarkets.com/sdk/python.md): Official Python SDK for the River Markets API
+- [Authentication](https://docs.rivermarkets.com/ws-api-reference/authentication.md): How to authenticate with the River Markets WebSocket API
+- [Fills](https://docs.rivermarkets.com/ws-api-reference/fills.md): Stream live fill (execution) events for one subaccount over a single WebSocket connection.
+- [Orderbooks](https://docs.rivermarkets.com/ws-api-reference/orderbooks.md): Subscribe to live orderbook updates for one or more markets over a single WebSocket connection.
+- [Orders](https://docs.rivermarkets.com/ws-api-reference/orders.md): Stream live order-status updates for one subaccount over a single WebSocket connection.
+- [Tradeprints](https://docs.rivermarkets.com/ws-api-reference/tradeprints.md): Subscribe to the live trade tape (every print) for one or more markets over a single WebSocket connection.
+
+## OpenAPI Specs
+
+- [openapi](https://docs.rivermarkets.com/openapi.json)

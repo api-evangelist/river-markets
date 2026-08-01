@@ -1,0 +1,47 @@
+generated: '2026-07-21'
+method: searched
+source: openapi/river-markets-openapi-original.json
+docs: https://docs.rivermarkets.com/api-reference/authentication
+notes: >-
+  Primary programmatic auth is Ed25519 request signing via three apiKey headers
+  (X-River-Key-Id, X-River-Timestamp, X-River-Signature). The canonical string is
+  LF-joined: METHOD\nPATH\nSORTED_QUERY\nTIMESTAMP\nSHA256(body) hex. Timestamp must
+  be within 30s of server time; signatures are deduped in Redis with a 60s TTL for
+  replay protection. Keys are asymmetric — the server stores only the public key and
+  the private key is shown once at creation and never traverses the wire after that.
+  BearerAuth (JWT) is used by the web client. The official Python SDK signs transparently.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: SignedRequestKeyId
+  type: apiKey
+  in: header
+  parameter: X-River-Key-Id
+  description: UUID of your API key (from Settings → API Keys).
+  sources:
+  - openapi/river-markets-openapi-original.json
+- name: SignedRequestTimestamp
+  type: apiKey
+  in: header
+  parameter: X-River-Timestamp
+  description: Current unix seconds. Must be within 30s of server time.
+  sources:
+  - openapi/river-markets-openapi-original.json
+- name: SignedRequestSignature
+  type: apiKey
+  in: header
+  parameter: X-River-Signature
+  description: 'Base64 Ed25519 signature over the canonical request: METHOD\nPATH\nSORTED_QUERY\nTIMESTAMP\nSHA256(body)
+    hex. See /api-reference/authentication for the full recipe.'
+  sources:
+  - openapi/river-markets-openapi-original.json
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: JWT bearer token for web client authentication.
+  sources:
+  - openapi/river-markets-openapi-original.json

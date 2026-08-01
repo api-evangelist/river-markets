@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/river-markets-openapi-original.json
+format: fastapi-validation
+notes: >-
+  The OpenAPI documents a single explicit error response across all 48 operations — HTTP 422
+  Validation Error, returning the FastAPI HTTPValidationError envelope (application/json). It is
+  NOT RFC 9457 application/problem+json. Standard authenticated-transport statuses (401/403 for a
+  bad/expired signature or stale timestamp, 404 for unknown resource, 429 for rate limiting) are
+  implied by the auth and rate-limit conventions but are not enumerated per-operation in the spec.
+error_envelope:
+  media_type: application/json
+  schema: HTTPValidationError
+  shape:
+    detail:
+    - loc: [string|int, ...]   # location path to the offending field
+      msg: string              # human-readable message
+      type: string             # error type code, e.g. value_error.missing
+problems:
+- status: 422
+  title: Validation Error
+  schema: HTTPValidationError
+  media_type: application/json
+  description: Request failed schema validation; detail[] enumerates each offending field with loc/msg/type.
+  applies_to: all operations
+implied_statuses:
+- status: 401
+  title: Unauthorized
+  cause: Missing or invalid Ed25519 signature headers, or BearerAuth token.
+- status: 403
+  title: Forbidden
+  cause: Signature valid but caller not permitted (row-level security), or timestamp outside the 30s skew window / replayed signature.
+- status: 404
+  title: Not Found
+  cause: Unknown river_id, order_id, subaccount_id, generic_asset_id, or watchlist_id.
+- status: 429
+  title: Too Many Requests
+  cause: Exceeded the rate limit (standard 10 req/s).

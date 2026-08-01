@@ -1,0 +1,157 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/river-markets-openapi-original.json
+notes: >-
+  No official hosted/remote MCP server was found for River Markets (no @modelcontextprotocol
+  package, no mcp.rivermarkets.com, no registry listing). This is a DERIVED candidate tool
+  list — one tool per REST operation — for building an MCP server over the documented API.
+server:
+  name: river-markets
+  transport: http
+  url: null
+tools:
+- name: list_complex_orders_v1_complex_orders_get
+  description: List Complex Orders
+  source_operation: openapi/river-markets-openapi-original.json#list_complex_orders_v1_complex_orders_get
+- name: create_complex_order_v1_complex_orders_post
+  description: Create Complex Order
+  source_operation: openapi/river-markets-openapi-original.json#create_complex_order_v1_complex_orders_post
+- name: cancel_all_complex_orders_v1_complex_orders_cancel_all_post
+  description: Cancel All Complex Orders
+  source_operation: openapi/river-markets-openapi-original.json#cancel_all_complex_orders_v1_complex_orders_cancel_all_post
+- name: get_complex_order_v1_complex_orders__complex_order_id__get
+  description: Get Complex Order
+  source_operation: openapi/river-markets-openapi-original.json#get_complex_order_v1_complex_orders__complex_order_id__get
+- name: cancel_complex_order_v1_complex_orders__complex_order_id__delete
+  description: Cancel Complex Order
+  source_operation: openapi/river-markets-openapi-original.json#cancel_complex_order_v1_complex_orders__complex_order_id__delete
+- name: list_fair_values_v1_fair_values_get
+  description: List Fair Values
+  source_operation: openapi/river-markets-openapi-original.json#list_fair_values_v1_fair_values_get
+- name: set_fair_value_v1_fair_values_post
+  description: Set Fair Value
+  source_operation: openapi/river-markets-openapi-original.json#set_fair_value_v1_fair_values_post
+- name: delete_fair_value_v1_fair_values__subaccount_id___river_id__delete
+  description: Delete Fair Value
+  source_operation: openapi/river-markets-openapi-original.json#delete_fair_value_v1_fair_values__subaccount_id___river_id__delete
+- name: get_fills_v1_fills_get
+  description: Get Fills
+  source_operation: openapi/river-markets-openapi-original.json#get_fills_v1_fills_get
+- name: list_generic_assets_v1_generic_assets_get
+  description: List Generic Assets
+  source_operation: openapi/river-markets-openapi-original.json#list_generic_assets_v1_generic_assets_get
+- name: create_generic_asset_v1_generic_assets_post
+  description: Create Generic Asset
+  source_operation: openapi/river-markets-openapi-original.json#create_generic_asset_v1_generic_assets_post
+- name: get_generic_asset_v1_generic_assets__generic_asset_id__get
+  description: Get Generic Asset
+  source_operation: openapi/river-markets-openapi-original.json#get_generic_asset_v1_generic_assets__generic_asset_id__get
+- name: update_generic_asset_v1_generic_assets__generic_asset_id__patch
+  description: Update Generic Asset
+  source_operation: openapi/river-markets-openapi-original.json#update_generic_asset_v1_generic_assets__generic_asset_id__patch
+- name: delete_generic_asset_v1_generic_assets__generic_asset_id__delete
+  description: Delete Generic Asset
+  source_operation: openapi/river-markets-openapi-original.json#delete_generic_asset_v1_generic_assets__generic_asset_id__delete
+- name: add_generic_asset_members_v1_generic_assets__generic_asset_id__members_post
+  description: Add Generic Asset Members
+  source_operation: openapi/river-markets-openapi-original.json#add_generic_asset_members_v1_generic_assets__generic_asset_id__members_post
+- name: remove_generic_asset_members_v1_generic_assets__generic_asset_id__members_delete
+  description: Remove Generic Asset Members
+  source_operation: openapi/river-markets-openapi-original.json#remove_generic_asset_members_v1_generic_assets__generic_asset_id__members_delete
+- name: get_exchange_balance_v1_balance_exchange_get
+  description: Get Exchange Balance
+  source_operation: openapi/river-markets-openapi-original.json#get_exchange_balance_v1_balance_exchange_get
+- name: search_markets_v1_markets_search_get
+  description: Search Markets
+  source_operation: openapi/river-markets-openapi-original.json#search_markets_v1_markets_search_get
+- name: lookup_markets_v1_markets_lookup_get
+  description: Lookup Markets
+  source_operation: openapi/river-markets-openapi-original.json#lookup_markets_v1_markets_lookup_get
+- name: match_market_v1_markets_match_get
+  description: Match Market
+  source_operation: openapi/river-markets-openapi-original.json#match_market_v1_markets_match_get
+- name: match_markets_batch_v1_markets_match_batch_post
+  description: Match Markets Batch
+  source_operation: openapi/river-markets-openapi-original.json#match_markets_batch_v1_markets_match_batch_post
+- name: get_generic_asset_orderbook_v1_orderbooks_generic_asset__generic_asset_id__get
+  description: Get Generic Asset Orderbook
+  source_operation: openapi/river-markets-openapi-original.json#get_generic_asset_orderbook_v1_orderbooks_generic_asset__generic_asset_id__get
+- name: get_orderbook_v1_orderbooks__river_id__get
+  description: Get Orderbook
+  source_operation: openapi/river-markets-openapi-original.json#get_orderbook_v1_orderbooks__river_id__get
+- name: create_order_v1_orders_post
+  description: Create Order
+  source_operation: openapi/river-markets-openapi-original.json#create_order_v1_orders_post
+- name: list_orders_v1_orders_get
+  description: List Orders
+  source_operation: openapi/river-markets-openapi-original.json#list_orders_v1_orders_get
+- name: get_order_v1_orders__order_id__get
+  description: Get Order
+  source_operation: openapi/river-markets-openapi-original.json#get_order_v1_orders__order_id__get
+- name: cancel_order_v1_orders__order_id__delete
+  description: Cancel Order
+  source_operation: openapi/river-markets-openapi-original.json#cancel_order_v1_orders__order_id__delete
+- name: edit_order_v1_orders__order_id__patch
+  description: Edit Order
+  source_operation: openapi/river-markets-openapi-original.json#edit_order_v1_orders__order_id__patch
+- name: get_order_queue_position_v1_orders__order_id__queue_position_get
+  description: Get Order Queue Position
+  source_operation: openapi/river-markets-openapi-original.json#get_order_queue_position_v1_orders__order_id__queue_position_get
+- name: cancel_all_orders_v1_orders_cancel_all_post
+  description: Cancel All Orders
+  source_operation: openapi/river-markets-openapi-original.json#cancel_all_orders_v1_orders_cancel_all_post
+- name: get_positions_v1_positions_get
+  description: Get Positions
+  source_operation: openapi/river-markets-openapi-original.json#get_positions_v1_positions_get
+- name: get_volume_v1_prices__river_id__volume_get
+  description: Get Volume
+  source_operation: openapi/river-markets-openapi-original.json#get_volume_v1_prices__river_id__volume_get
+- name: get_volume_batch_v1_prices_volume_get
+  description: Get Volume Batch
+  source_operation: openapi/river-markets-openapi-original.json#get_volume_batch_v1_prices_volume_get
+- name: get_prices_v1_prices__river_id__get
+  description: Get Prices
+  source_operation: openapi/river-markets-openapi-original.json#get_prices_v1_prices__river_id__get
+- name: list_subaccounts_v1_subaccounts_get
+  description: List Subaccounts
+  source_operation: openapi/river-markets-openapi-original.json#list_subaccounts_v1_subaccounts_get
+- name: create_subaccount_v1_subaccounts_post
+  description: Create Subaccount
+  source_operation: openapi/river-markets-openapi-original.json#create_subaccount_v1_subaccounts_post
+- name: get_subaccount_v1_subaccounts__subaccount_id__get
+  description: Get Subaccount
+  source_operation: openapi/river-markets-openapi-original.json#get_subaccount_v1_subaccounts__subaccount_id__get
+- name: update_subaccount_v1_subaccounts__subaccount_id__patch
+  description: Update Subaccount
+  source_operation: openapi/river-markets-openapi-original.json#update_subaccount_v1_subaccounts__subaccount_id__patch
+- name: delete_subaccount_v1_subaccounts__subaccount_id__delete
+  description: Delete Subaccount
+  source_operation: openapi/river-markets-openapi-original.json#delete_subaccount_v1_subaccounts__subaccount_id__delete
+- name: get_tradeprints_v1_tradeprints_get
+  description: Get Tradeprints
+  source_operation: openapi/river-markets-openapi-original.json#get_tradeprints_v1_tradeprints_get
+- name: list_watchlists_v1_watchlists_get
+  description: List Watchlists
+  source_operation: openapi/river-markets-openapi-original.json#list_watchlists_v1_watchlists_get
+- name: create_watchlist_v1_watchlists_post
+  description: Create Watchlist
+  source_operation: openapi/river-markets-openapi-original.json#create_watchlist_v1_watchlists_post
+- name: get_watchlist_v1_watchlists__watchlist_id__get
+  description: Get Watchlist
+  source_operation: openapi/river-markets-openapi-original.json#get_watchlist_v1_watchlists__watchlist_id__get
+- name: update_watchlist_v1_watchlists__watchlist_id__patch
+  description: Update Watchlist
+  source_operation: openapi/river-markets-openapi-original.json#update_watchlist_v1_watchlists__watchlist_id__patch
+- name: delete_watchlist_v1_watchlists__watchlist_id__delete
+  description: Delete Watchlist
+  source_operation: openapi/river-markets-openapi-original.json#delete_watchlist_v1_watchlists__watchlist_id__delete
+- name: add_watchlist_members_v1_watchlists__watchlist_id__members_post
+  description: Add Watchlist Members
+  source_operation: openapi/river-markets-openapi-original.json#add_watchlist_members_v1_watchlists__watchlist_id__members_post
+- name: remove_watchlist_members_v1_watchlists__watchlist_id__members_delete
+  description: Remove Watchlist Members
+  source_operation: openapi/river-markets-openapi-original.json#remove_watchlist_members_v1_watchlists__watchlist_id__members_delete
+- name: reorder_watchlist_members_v1_watchlists__watchlist_id__members_order_put
+  description: Reorder Watchlist Members
+  source_operation: openapi/river-markets-openapi-original.json#reorder_watchlist_members_v1_watchlists__watchlist_id__members_order_put

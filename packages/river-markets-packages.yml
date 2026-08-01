@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://pypi.org/project/rivermarkets/
+packages:
+- language: python
+  registry: pypi
+  name: rivermarkets
+  version: 0.5.0
+  url: https://pypi.org/project/rivermarkets/
+  install: pip install rivermarkets
+  repository: https://github.com/rivermarkets/rivermarkets-python-sdk
+  docs: https://docs.rivermarkets.com/sdk/python
+  official: true
+  description: >-
+    Official Python SDK for the River Markets API. Fully-typed synchronous (RiverMarkets)
+    and asynchronous (AsyncRiverMarkets) clients. Signs every REST request and WebSocket
+    handshake locally with Ed25519 — the private key never leaves the process.
+notes: >-
+  Only a first-party Python SDK is published. No npm/JavaScript, Go, RubyGems, NuGet,
+  Maven, Packagist, or crates.io package was found (npm registry 404 for "rivermarkets").
+  The GitHub org github.com/rivermarkets currently hosts one public repo: rivermarkets-python-sdk.

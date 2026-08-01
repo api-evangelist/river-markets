@@ -1,0 +1,113 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/river-markets-openapi-original.json
+notes: >-
+  Entity-relationship graph derived from OpenAPI schema id-reference fields. The unified
+  River ID (river_id) is the cross-exchange market key; subaccount_id is the tenancy/isolation
+  key that most trading records belong to.
+entities:
+- name: Subaccount
+  key: subaccount_id
+  description: Isolated trading container holding its own exchange credentials, orders, positions, and balances.
+  schema: SubaccountResponse
+- name: Market
+  key: river_id
+  description: A prediction-market contract, unified across exchanges by River ID (also exposes exchange-native ticker/slug).
+  schema: MarketSearchResult
+- name: Order
+  key: river_order_id
+  description: A routed order (simple limit, or child of an iceberg/peg/smart-taker parent) against a market.
+  schema: OrderResponse
+- name: ComplexOrder
+  key: complex_order_id
+  description: A conditional or iceberg order composed of one or more child orders.
+  schema: ComplexOrderResponse
+- name: Fill
+  key: exchange_trade_id
+  description: An execution/trade against an order.
+  schema: FillResponse
+- name: Position
+  key: river_id + subaccount_id
+  description: Net position in a market for a subaccount.
+  schema: PositionResponse
+- name: FairValue
+  key: subaccount_id + river_id
+  description: A caller-set fair value for an instrument on a subaccount.
+  schema: FairValueResponse
+- name: GenericAsset
+  key: generic_asset_id
+  description: A user-owned basket of markets (river_ids).
+  schema: GenericAssetResponse
+- name: Watchlist
+  key: watchlist_id
+  description: An ordered, user-owned list of markets.
+  schema: WatchlistResponse
+- name: ExchangeBalance
+  key: subaccount_id
+  description: Live per-exchange balance for a subaccount.
+  schema: ExchangeBalanceResponse
+relationships:
+- from: Order
+  to: Subaccount
+  type: belongs_to
+  via: subaccount_id
+- from: Order
+  to: Market
+  type: belongs_to
+  via: river_id
+- from: Order
+  to: ComplexOrder
+  type: belongs_to
+  via: parent_iceberg_order_id | parent_peg_order_id | parent_smart_taker_order_id
+- from: ComplexOrder
+  to: Subaccount
+  type: belongs_to
+  via: subaccount_id
+- from: ComplexOrder
+  to: Market
+  type: belongs_to
+  via: river_id
+- from: Fill
+  to: Order
+  type: belongs_to
+  via: exchange_order_id
+- from: Fill
+  to: Market
+  type: belongs_to
+  via: river_id
+- from: Position
+  to: Subaccount
+  type: belongs_to
+  via: subaccount_id
+- from: Position
+  to: Market
+  type: belongs_to
+  via: river_id
+- from: FairValue
+  to: Subaccount
+  type: belongs_to
+  via: subaccount_id
+- from: FairValue
+  to: Market
+  type: belongs_to
+  via: river_id
+- from: GenericAsset
+  to: Subaccount
+  type: belongs_to
+  via: owner_subaccount_id
+- from: GenericAsset
+  to: Market
+  type: has_many
+  via: member river_ids
+- from: Watchlist
+  to: Subaccount
+  type: belongs_to
+  via: owner_subaccount_id
+- from: Watchlist
+  to: Market
+  type: has_many
+  via: member river_ids
+- from: ExchangeBalance
+  to: Subaccount
+  type: belongs_to
+  via: subaccount_id

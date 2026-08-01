@@ -1,0 +1,22 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/river-markets-openapi-original.json
+skills:
+- file: river-markets-search-and-trade.md
+  name: Search a market and place an order
+  api: openapi/river-markets-openapi-original.json
+  operations:
+  - search_markets_v1_markets_search_get
+  - get_orderbook_v1_orderbooks__river_id__get
+  - create_order_v1_orders_post
+  - get_order_v1_orders__order_id__get
+  - cancel_order_v1_orders__order_id__delete
+- file: river-markets-subaccount-and-positions.md
+  name: Set up a subaccount and track positions
+  api: openapi/river-markets-openapi-original.json
+  operations:
+  - create_subaccount_v1_subaccounts_post
+  - list_subaccounts_v1_subaccounts_get
+  - get_exchange_balance_v1_balance_exchange_get
+  - get_positions_v1_positions_get
+  - get_fills_v1_fills_get

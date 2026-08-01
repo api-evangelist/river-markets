@@ -1,0 +1,126 @@
+generated: '2026-07-21'
+method: generated
+source: https://docs.rivermarkets.com/ws-api-reference
+spec_type: AsyncAPI
+x-note: >-
+  River Markets publishes no AsyncAPI document; this file is GENERATED faithfully from the
+  documented WebSocket API (ws-api-reference: fills, orderbooks, orders, tradeprints). Channel
+  addresses, subscribe/unsubscribe protocol, and server frame types are taken verbatim from the
+  docs. Payloads are summarized where the docs give a representative example.
+asyncapi: 3.0.0
+info:
+  title: River Markets Streaming API
+  version: 1.0.0
+  description: >-
+    Real-time WebSocket streams over wss://api.rivermarkets.com. Client frames are JSON text;
+    server frames are orjson-serialized UTF-8 bytes. Handshake auth uses the Ed25519 signed-request
+    flow moved to query params (key_id, ts, sig over WS\nPATH\nSORTED_QUERY\nTIMESTAMP), or a
+    Supabase JWT (?access_token=) for first-party web clients. Invalid/missing auth closes with 4401.
+servers:
+  production:
+    host: api.rivermarkets.com
+    protocol: wss
+    pathname: /v1/ws
+    security:
+    - $ref: '#/components/securitySchemes/signedHandshake'
+channels:
+  orderbooks:
+    address: /v1/ws/orderbooks
+    description: Live orderbook snapshots and updates for one or more markets (subscribe by river_ids).
+    messages:
+      subscribe:
+        $ref: '#/components/messages/subscribeRiverIds'
+      snapshotOrUpdate:
+        $ref: '#/components/messages/orderbookFrame'
+  fills:
+    address: /v1/ws/fills
+    description: Live fill (execution) events for one subaccount over a single connection.
+    messages:
+      subscribe:
+        $ref: '#/components/messages/subscribeSubaccount'
+      fill:
+        $ref: '#/components/messages/serverEvent'
+  orders:
+    address: /v1/ws/orders
+    description: Live order-status updates for one subaccount over a single connection.
+    messages:
+      subscribe:
+        $ref: '#/components/messages/subscribeSubaccount'
+      order:
+        $ref: '#/components/messages/serverEvent'
+  tradeprints:
+    address: /v1/ws/tradeprints
+    description: Live trade tape (every print) for one or more markets (subscribe by river_ids).
+    messages:
+      subscribe:
+        $ref: '#/components/messages/subscribeRiverIds'
+      print:
+        $ref: '#/components/messages/serverEvent'
+operations:
+  receiveOrderbooks:
+    action: receive
+    channel:
+      $ref: '#/channels/orderbooks'
+  receiveFills:
+    action: receive
+    channel:
+      $ref: '#/channels/fills'
+  receiveOrders:
+    action: receive
+    channel:
+      $ref: '#/channels/orders'
+  receiveTradeprints:
+    action: receive
+    channel:
+      $ref: '#/channels/tradeprints'
+components:
+  securitySchemes:
+    signedHandshake:
+      type: httpApiKey
+      in: query
+      name: sig
+      description: Ed25519 signature over WS\nPATH\nSORTED_QUERY\nTIMESTAMP, with key_id and ts query params; or ?access_token=<jwt>.
+  messages:
+    subscribeRiverIds:
+      name: subscribeRiverIds
+      payload:
+        type: object
+        properties:
+          action:
+            type: string
+            enum: [subscribe, unsubscribe]
+          river_ids:
+            type: array
+            items:
+              type: integer
+    subscribeSubaccount:
+      name: subscribeSubaccount
+      payload:
+        type: object
+        properties:
+          action:
+            type: string
+            enum: [subscribe, unsubscribe]
+          subaccount_id:
+            type: string
+    orderbookFrame:
+      name: orderbookFrame
+      payload:
+        type: object
+        properties:
+          type:
+            type: string
+            enum: [snapshot, update, pending, error, reconnect]
+          river_id:
+            type: integer
+          data:
+            type: object
+            description: Orderbook payload — bids/asks arrays of {price, qty}, best_bid_price, best_ask_price, exchange_timestamp, is_valid.
+    serverEvent:
+      name: serverEvent
+      payload:
+        type: object
+        properties:
+          type:
+            type: string
+            description: Event type frame (e.g. snapshot/update/pending/error/reconnect for orderbooks; event payloads for fills/orders/tradeprints).

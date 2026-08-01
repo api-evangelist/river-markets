@@ -1,0 +1,20 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for River Markets API
+  version: 1.0.0
+extends: openapi/river-markets-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-category: prediction-markets-prime-brokerage
+    x-apievangelist-auth: ed25519-request-signing
+    x-apievangelist-rate-limit: 10 req/s standard
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/river-markets-authentication.yml
+      conventions: conventions/river-markets-conventions.yml
+      errors: errors/river-markets-problem-types.yml
+      data_model: data-model/river-markets-data-model.yml
+      streaming: asyncapi/river-markets-streaming-asyncapi.yml

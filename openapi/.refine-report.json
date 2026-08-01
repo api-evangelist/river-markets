@@ -1,0 +1,38 @@
+{
+  "provider": "river-markets",
+  "sources": [
+    "river-markets-balance-api-openapi.yml",
+    "river-markets-complex-orders-api-openapi.yml",
+    "river-markets-fair-values-api-openapi.yml",
+    "river-markets-fills-api-openapi.yml",
+    "river-markets-generic-assets-api-openapi.yml",
+    "river-markets-markets-api-openapi.yml",
+    "river-markets-orderbooks-api-openapi.yml",
+    "river-markets-orders-api-openapi.yml",
+    "river-markets-positions-api-openapi.yml",
+    "river-markets-prices-api-openapi.yml",
+    "river-markets-subaccounts-api-openapi.yml",
+    "river-markets-tradeprints-api-openapi.yml",
+    "river-markets-watchlists-api-openapi.yml"
+  ],
+  "outputs": [
+    "river-markets-balance-api-openapi.yml",
+    "river-markets-complex-orders-api-openapi.yml",
+    "river-markets-fair-values-api-openapi.yml",
+    "river-markets-fills-api-openapi.yml",
+    "river-markets-generic-assets-api-openapi.yml",
+    "river-markets-markets-api-openapi.yml",
+    "river-markets-orderbooks-api-openapi.yml",
+    "river-markets-orders-api-openapi.yml",
+    "river-markets-positions-api-openapi.yml",
+    "river-markets-prices-api-openapi.yml",
+    "river-markets-subaccounts-api-openapi.yml",
+    "river-markets-tradeprints-api-openapi.yml",
+    "river-markets-watchlists-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

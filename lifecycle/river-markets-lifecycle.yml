@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.rivermarkets.com
+versioning:
+  scheme: uri-path
+  current: v1
+  base_url: https://api.rivermarkets.com/v1
+  docs: https://docs.rivermarkets.com/api-reference/overview
+deprecation:
+  policy_url: null
+  sunset_header: null
+  notes: No published deprecation policy or RFC 8594 Sunset/Deprecation header support found.
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  notes: >-
+    No live status page found. status.rivermarkets.com does not resolve and
+    rivermarkets.statuspage.io is unclaimed (redirects to atlassian.com/software/statuspage).
+deprecated_operations: []
+notes: >-
+  Single-version API (v1) on a URI-path scheme. As a Y Combinator Spring 2026 company the
+  provider has not yet published a formal deprecation policy, SLA, or status page — absence
+  recorded as valid data. No StatusPage or Deprecation canonical pointer is emitted.
