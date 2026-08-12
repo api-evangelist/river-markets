@@ -280,7 +280,7 @@ common:
 - type: GitHubOrganization
   url: https://github.com/rivermarkets
 - type: OpenAPI
-  url: openapi/river-markets-openapi-original.json
+  url: openapi/_original/river-markets-openapi-original.json
 - type: Authentication
   url: authentication/river-markets-authentication.yml
 - type: DomainSecurity
