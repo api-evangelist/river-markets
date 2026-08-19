@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance generic-assets API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "generic-assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Generic Assets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/generic-assets",
+            "params": [
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by category. Repeat to filter to multiple categories."
+              },
+              {
+                "name": "subcategory",
+                "value": "",
+                "type": "query",
+                "description": "Filter by subcategory"
+              },
+              {
+                "name": "owner",
+                "value": "",
+                "type": "query",
+                "description": "'me' for own baskets only, 'platform' for public only"
+              }
+            ]
+          },
+          "docs": "List generic assets visible to the caller (their own + platform-curated approved).\n\nSorted by resolves_at (soonest first), then name."
+        },
+        {
+          "info": {
+            "name": "Create Generic Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/generic-assets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new user-owned generic asset (basket)."
+        },
+        {
+          "info": {
+            "name": "Get Generic Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/generic-assets/:generic_asset_id",
+            "params": [
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch a single generic asset (own or public-approved) with its resolved member markets."
+        },
+        {
+          "info": {
+            "name": "Update Generic Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.rivermarkets.com/v1/generic-assets/:generic_asset_id",
+            "params": [
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a user-owned generic asset's name or description. Platform-curated assets cannot be edited via this route."
+        },
+        {
+          "info": {
+            "name": "Delete Generic Asset",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/generic-assets/:generic_asset_id",
+            "params": [
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a user-owned generic asset (cascades to members)."
+        },
+        {
+          "info": {
+            "name": "Add Generic Asset Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/generic-assets/:generic_asset_id/members",
+            "params": [
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add river_ids to a user-owned generic asset."
+        },
+        {
+          "info": {
+            "name": "Remove Generic Asset Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/generic-assets/:generic_asset_id/members",
+            "params": [
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove river_ids from a user-owned generic asset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,206 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River balance markets API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "markets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/markets/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Search query"
+              },
+              {
+                "name": "exchange_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by exchange name (KALSHI, POLYMARKET)"
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Filter by canonical category. Repeat the param to filter to multiple categories (Sports, Crypto, Politics, Finance, Entertainment, Science & Tech, Weather, World Affairs, Health, Social, Other)."
+              },
+              {
+                "name": "subcategory",
+                "value": "",
+                "type": "query",
+                "description": "Filter by subcategory (e.g. Basketball, Football)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instrument status"
+              },
+              {
+                "name": "expiration_date_start",
+                "value": "",
+                "type": "query",
+                "description": "Start of expiration date range (inclusive, ISO 8601)"
+              },
+              {
+                "name": "expiration_date_end",
+                "value": "",
+                "type": "query",
+                "description": "End of expiration date range (exclusive, ISO 8601)"
+              },
+              {
+                "name": "start_datetime_after",
+                "value": "",
+                "type": "query",
+                "description": "Filter to markets with start_datetime >= this (ISO 8601)"
+              },
+              {
+                "name": "start_datetime_before",
+                "value": "",
+                "type": "query",
+                "description": "Filter to markets with start_datetime < this (ISO 8601)"
+              },
+              {
+                "name": "event_ticker",
+                "value": "",
+                "type": "query",
+                "description": "Filter by event_ticker (exact match)"
+              },
+              {
+                "name": "last_price_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter to markets with last_price >= this value (0.0–1.0 YES probability)."
+              },
+              {
+                "name": "last_price_max",
+                "value": "",
+                "type": "query",
+                "description": "Filter to markets with last_price <= this value (0.0–1.0 YES probability)."
+              },
+              {
+                "name": "volume_min",
+                "value": "",
+                "type": "query",
+                "description": "Filter to events whose total summed volume >= this value."
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Sort mode for event-based pagination: trending, volume, newest, ending-soon, start-time, price"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination"
+              },
+              {
+                "name": "event_limit",
+                "value": "",
+                "type": "query",
+                "description": "Paginate by events instead of markets. Up to 200 by default; values above that require start_datetime_after or start_datetime_before."
+              },
+              {
+                "name": "event_offset",
+                "value": "",
+                "type": "query",
+                "description": "Event offset for event-based pagination"
+              }
+            ]
+          },
+          "docs": "Search and browse markets across all exchanges.\n\nSupports:\n- Exact match on ticker, condition_id, slug, river_id\n- Full-text search on name, description, tags\n- Browse by filters (no query required)\n- Results ranked by relevance\n\nWe default to active markets in the view so things are faster"
+        },
+        {
+          "info": {
+            "name": "Lookup Markets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/markets/lookup",
+            "params": [
+              {
+                "name": "river_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of river IDs"
+              }
+            ]
+          },
+          "docs": "Batch lookup markets by river_ids."
+        },
+        {
+          "info": {
+            "name": "Match Market",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/markets/match",
+            "params": [
+              {
+                "name": "ticker",
+                "value": "",
+                "type": "query",
+                "description": "Exact Kalshi ticker (e.g. KXNBA-26-DET)"
+              },
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query",
+                "description": "Exact Polymarket slug (e.g. will-the-denver-nuggets-win-the-2026-nba-finals)"
+              }
+            ]
+          },
+          "docs": "Exact match a single market by Kalshi ticker or Polymarket slug. Supply exactly one."
+        },
+        {
+          "info": {
+            "name": "Match Markets Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/markets/match/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Batch-resolve many markets by exact Kalshi ticker and/or Polymarket slug in one request.\n\nThe single-market ``/match`` endpoint costs one round-trip per identifier, so resolving\nthousands of mappings serially is slow. This endpoint takes lists of tickers and/or slugs\n(send them together in one call) and returns a full market row — including ``river_id``,\n``ticker``, ``slug`` and ``exchange_name`` — for every identifier that matched. Identifiers\nwith no match come back in ``unmatched_tickers`` / "
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

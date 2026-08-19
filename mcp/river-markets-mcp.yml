@@ -2,10 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/river-markets-openapi-original.json
-notes: >-
-  No official hosted/remote MCP server was found for River Markets (no @modelcontextprotocol
-  package, no mcp.rivermarkets.com, no registry listing). This is a DERIVED candidate tool
-  list — one tool per REST operation — for building an MCP server over the documented API.
+notes: No official hosted/remote MCP server was found for River Markets (no @modelcontextprotocol package,
+  no mcp.rivermarkets.com, no registry listing). This is a DERIVED candidate tool list — one tool per
+  REST operation — for building an MCP server over the documented API.
 server:
   name: river-markets
   transport: http
@@ -155,3 +154,9 @@ tools:
 - name: reorder_watchlist_members_v1_watchlists__watchlist_id__members_order_put
   description: Reorder Watchlist Members
   source_operation: openapi/river-markets-openapi-original.json#reorder_watchlist_members_v1_watchlists__watchlist_id__members_order_put
+deployment:
+  mode: none
+  verified: derived
+  tools: 48
+  checked: '2026-08-12'
+  source: catalog MCP census

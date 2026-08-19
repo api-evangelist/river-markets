@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance fair-values API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "fair-values",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Fair Values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/fair-values",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to a single subaccount"
+              },
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to a single instrument"
+              }
+            ]
+          },
+          "docs": "List the caller's fair values, optionally scoped to one subaccount and/or one instrument."
+        },
+        {
+          "info": {
+            "name": "Set Fair Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/fair-values",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Set the fair value for an instrument on a subaccount (insert-or-overwrite)."
+        },
+        {
+          "info": {
+            "name": "Delete Fair Value",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/fair-values/:subaccount_id/:river_id",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Clear the fair value for an instrument on a subaccount."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

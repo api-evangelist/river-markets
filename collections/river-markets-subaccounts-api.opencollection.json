@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance subaccounts API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "subaccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Subaccounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/subaccounts"
+          },
+          "docs": "Enumerate all trading subaccounts accessible to the user.\n\nReturns list of accounts with identifiers and metadata."
+        },
+        {
+          "info": {
+            "name": "Create Subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/subaccounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new trading subaccount for the authenticated user."
+        },
+        {
+          "info": {
+            "name": "Get Subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/subaccounts/:subaccount_id",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch configuration and metadata for a specific subaccount.\n\nReturns account configuration, limits, and descriptive metadata."
+        },
+        {
+          "info": {
+            "name": "Update Subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.rivermarkets.com/v1/subaccounts/:subaccount_id",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing subaccount."
+        },
+        {
+          "info": {
+            "name": "Delete Subaccount",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/subaccounts/:subaccount_id",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a subaccount. Custodial subaccounts cannot be deleted.\n\nThis is a soft delete: the row is marked is_active = false so the audit trail\n(orders, fills, ledger entries) stays intact. The user never sees it again."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

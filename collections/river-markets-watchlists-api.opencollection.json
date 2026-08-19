@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance watchlists API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "watchlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Watchlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/watchlists",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "Restrict to a single owning subaccount"
+              }
+            ]
+          },
+          "docs": "List the caller's watchlists (optionally scoped to one subaccount), newest first."
+        },
+        {
+          "info": {
+            "name": "Create Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/watchlists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new watchlist, optionally seeded with an ordered set of river_ids."
+        },
+        {
+          "info": {
+            "name": "Get Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Fetch a single watchlist with its ordered member markets."
+        },
+        {
+          "info": {
+            "name": "Update Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.rivermarkets.com/v1/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Rename a watchlist or edit its description."
+        },
+        {
+          "info": {
+            "name": "Delete Watchlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/watchlists/:watchlist_id",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a watchlist (cascades to its members)."
+        },
+        {
+          "info": {
+            "name": "Add Watchlist Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/watchlists/:watchlist_id/members",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Append river_ids to the end of a watchlist."
+        },
+        {
+          "info": {
+            "name": "Remove Watchlist Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/watchlists/:watchlist_id/members",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Remove river_ids from a watchlist. Remaining members keep their relative order."
+        },
+        {
+          "info": {
+            "name": "Reorder Watchlist Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.rivermarkets.com/v1/watchlists/:watchlist_id/members/order",
+            "params": [
+              {
+                "name": "watchlist_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reorder a watchlist. The body is the full ordered river_id list; the server\nrewrites each member's position to match. Unknown river_ids are ignored;\nmembers omitted from the list are pushed to the end in their prior order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

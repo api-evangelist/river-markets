@@ -1,0 +1,217 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance orders API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/orders",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by order status. Accepts a single OrderStatus name (e.g. 'RESTING') or the meta-value 'ACTIVE' which resolves to RESTING."
+              },
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instrument ID"
+              },
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by generic asset ID"
+              },
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific subaccount"
+              },
+              {
+                "name": "parent_iceberg_order_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter to child tranches of a specific iceberg parent."
+              },
+              {
+                "name": "parent_peg_order_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter to child tranches of a specific peg parent."
+              },
+              {
+                "name": "parent_smart_taker_order_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter to IOC children of a specific smart-taker parent."
+              },
+              {
+                "name": "buy_flag",
+                "value": "",
+                "type": "query",
+                "description": "Filter by direction: true=buys, false=sells"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Free-text search across the order's market: ticker/slug, the human-readable question (event title, market name, outcome) via full-text + substring match, plus the order's river_id / order id / generic asset id. Applied server-side over all matching orders, not just the current page."
+              },
+              {
+                "name": "show_tp_sl_active",
+                "value": "",
+                "type": "query",
+                "description": "When true, complex_order_ids only includes attached TP/SL orders with status PENDING or ACTIVE."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page (max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "List orders with optional filters.\n\nReturns a paginated list of orders across all accessible subaccounts, ordered by `created_at` descending.\n\n**Filters:**\nAll filters are optional and can be combined. If no `subaccount_id` is specified,\nreturns orders from all subaccounts the user has access to.\n\n**Order Statuses:**\n- `PENDING_SUBMISSION`: Order received, awaiting exchange submission.\n- `PROCESSING`: Being processed by the order consumer.\n- `RESTING`: Live on the exchange order book (may includ"
+        },
+        {
+          "info": {
+            "name": "Create Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Place a new order.\n\nSubmits an order for asynchronous processing. The order is persisted immediately\nand queued for execution on the target exchange.\n\nSee  [Orders](https://docs.rivermarkets.com/concepts/orders) and [Order Types](https://docs.rivermarkets.com/concepts/order-types) for more information.\n\n**Asset Selection:**\nProvide exactly one of `river_id` (standard instrument) or `generic_asset_id` (user-defined basket).\nGeneric asset orders only support `MARKET` order type — the system automa"
+        },
+        {
+          "info": {
+            "name": "Get Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single order by ID with its fills.\n\nReturns complete order details including execution history.\n\n**Use Cases:**\n- Track order progress and execution quality\n- Reconcile fills for accounting\n- Debug rejected or partially filled orders"
+        },
+        {
+          "info": {
+            "name": "Edit Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.rivermarkets.com/v1/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Edit (amend) a resting simple limit order.\n\nOnly `qty` and `price` are editable. `qty` is the new TOTAL quantity (not remaining).\nThe order must be RESTING, a simple order (no iceberg/peg parent), a single-instrument\nLIMIT order. Returns 202 Accepted; final status is delivered via the orders WS."
+        },
+        {
+          "info": {
+            "name": "Cancel Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/orders/:order_id",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel an existing order.\n\nRequest cancellation of an order.\nReturns 202 Accepted with order state - cancellation is processed asynchronously."
+        },
+        {
+          "info": {
+            "name": "Get Order Queue Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/orders/:order_id/queue-position",
+            "params": [
+              {
+                "name": "order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the best (minimum) queue position across all exchange orders backing this river order.\n\nCurrently supported only for Kalshi-backed orders."
+        },
+        {
+          "info": {
+            "name": "Cancel All Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/orders/cancel-all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel all open orders for a subaccount.\n\nIf `river_ids` is set, only orders on those instruments are cancelled;\nit must be omitted/null or non-empty. Cancellation is processed\nasynchronously by the order consumer."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

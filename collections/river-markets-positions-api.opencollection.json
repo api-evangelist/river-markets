@@ -1,0 +1,57 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance positions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/positions",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by specific subaccount"
+              },
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instrument"
+              },
+              {
+                "name": "include_closed",
+                "value": "",
+                "type": "query",
+                "description": "Include positions in closed markets"
+              }
+            ]
+          },
+          "docs": "Fetch positions for user's subaccounts.\n\nPositions are computed from cumulative fills, with avg buy/sell prices,\nfees, and fill count. Returns positions grouped by subaccount.\nBy default, only positions in open markets are returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

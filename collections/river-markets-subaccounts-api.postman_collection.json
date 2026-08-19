@@ -1,0 +1,760 @@
+{
+  "item": [
+    {
+      "id": "a5566418-17dd-467a-bf25-94d0614840f5",
+      "name": "subaccounts",
+      "description": {
+        "content": "Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "03341b5d-eb18-4244-a6aa-4c63d1fa2394",
+          "name": "List Subaccounts",
+          "request": {
+            "name": "List Subaccounts",
+            "description": {
+              "content": "Enumerate all trading subaccounts accessible to the user.\n\nReturns list of accounts with identifiers and metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subaccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e38daef7-8f0d-4038-bcb1-1471b986d627",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"subaccount_id\": \"ba01bfe7-757c-4f18-adea-8d67df16ea3d\",\n    \"name\": \"string\",\n    \"account_type\": \"non_custodial\",\n    \"is_active\": true,\n    \"inserted_at\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"subaccount_id\": \"b72ea086-5822-18fb-c937-8ed5f2bd3f3a\",\n    \"name\": \"string\",\n    \"account_type\": \"custodial\",\n    \"is_active\": true,\n    \"inserted_at\": \"string\",\n    \"description\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "760e2372-4a2a-4e19-bc8c-cea209cd3afc",
+          "name": "Create Subaccount",
+          "request": {
+            "name": "Create Subaccount",
+            "description": {
+              "content": "Create a new trading subaccount for the authenticated user.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subaccounts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"account_type\": \"non_custodial\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da43aef0-c0f3-4cd2-8794-490878be5168",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"account_type\": \"non_custodial\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subaccount_id\": \"9a9e1262-80a9-d5ce-62a0-fe01db4593c7\",\n  \"name\": \"string\",\n  \"account_type\": \"custodial\",\n  \"is_active\": true,\n  \"inserted_at\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "83649c7b-31fd-4715-bc10-591635e38e60",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"account_type\": \"non_custodial\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24ea5bbe-1814-45b7-b6f8-3d7b12d4f227",
+          "name": "Get Subaccount",
+          "request": {
+            "name": "Get Subaccount",
+            "description": {
+              "content": "Fetch configuration and metadata for a specific subaccount.\n\nReturns account configuration, limits, and descriptive metadata.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subaccounts",
+                ":subaccount_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subaccount_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ab43b6c-de9e-4b36-9e8b-2634a3650bb8",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts",
+                    ":subaccount_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subaccount_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subaccount_id\": \"9a9e1262-80a9-d5ce-62a0-fe01db4593c7\",\n  \"name\": \"string\",\n  \"account_type\": \"custodial\",\n  \"is_active\": true,\n  \"inserted_at\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdee1237-a508-4343-bb55-e3ccd57e4737",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts",
+                    ":subaccount_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subaccount_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9fcc8698-5890-431d-99a7-71f20335a4bd",
+          "name": "Update Subaccount",
+          "request": {
+            "name": "Update Subaccount",
+            "description": {
+              "content": "Update an existing subaccount.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subaccounts",
+                ":subaccount_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subaccount_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5685d3ea-76c8-4e8e-97cb-eeab0783154d",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts",
+                    ":subaccount_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subaccount_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"subaccount_id\": \"9a9e1262-80a9-d5ce-62a0-fe01db4593c7\",\n  \"name\": \"string\",\n  \"account_type\": \"custodial\",\n  \"is_active\": true,\n  \"inserted_at\": \"string\",\n  \"description\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b2203c7-441d-43f2-8e21-8653ac1f64df",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts",
+                    ":subaccount_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subaccount_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fbfd5b57-0378-450f-aa1d-c38b066585e8",
+          "name": "Delete Subaccount",
+          "request": {
+            "name": "Delete Subaccount",
+            "description": {
+              "content": "Delete a subaccount. Custodial subaccounts cannot be deleted.\n\nThis is a soft delete: the row is marked is_active = false so the audit trail\n(orders, fills, ledger entries) stays intact. The user never sees it again.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "subaccounts",
+                ":subaccount_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "subaccount_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9d50831-c31f-4a6b-9ab0-c39b63368302",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts",
+                    ":subaccount_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subaccount_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "730234e9-894a-4a2f-8717-4d43dc562afd",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "subaccounts",
+                    ":subaccount_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "subaccount_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rivermarkets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-River-Key-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c8062a62-f5df-4315-86d5-c9995db12668",
+    "name": "River Markets balance subaccounts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Getting Started\n\n\nRiver Markets provides users with a unified prime brokerage interface for prediction markets, including\n- Liquidity aggregation\n- Order routing\n- Market and data search\n\nThis API guide will help you get up and running quickly.\n\n## Concepts\n\n### River IDs\n\nEvery market across all exchanges is assigned a unique **River ID** - a unified identifier that works across our entire platform. This allows you to:\n\n- Reference the same market consistently regardless of which exchange it trades on\n- Place orders using a single identifier format\n- Track positions and fills across exchanges with one ID\n\nWhen searching for markets, the API returns both the exchange-native identifier (e.g., Kalshi ticker, Polymarket slug) and the River ID. Use the River ID when placing orders.\n\n### Subaccounts\n\n**Subaccounts** let you organize your trading activity into separate containers. Each subaccount:\n\n- Has its own set of exchange credentials\n- Maintains separate positions and order history\n- Can represent different strategies, clients, or portfolios\n\nThis is useful for:\n- **Fund managers**: Segregate client portfolios\n- **Traders**: Separate strategies (e.g., momentum vs. mean reversion)\n- **Teams**: Give team members isolated trading environments\n\n## 1. Create an Account\n\nSign up at [app.rivermarkets.com](https://app.rivermarkets.com) to create your account.\n\n## 2. Generate an API Key\n\n1. Log in to your dashboard\n2. Navigate to **Settings → API Keys**\n3. Click **Create API Key**\n4. Copy and securely store your key - it will only be shown once\n\n## 3. Install required packages\n\n```python\npip install requests\n```\n\n## 4. Make Your First Request\n\nTest your API key by searching for markets.\n\nWe support ticker (kalshi ticker, polymarket condition_id/slug, river_id) and fuzzy search ('bitcoin', 'fed rates').\n\n> **Using the SDK?** `rivermarkets` (Python) \n> handle request signing for you — pass your `KEY_ID` and `PRIVATE_KEY` to the\n> client constructor and forget about the rest of this section. The raw example\n> below is for anyone integrating without an SDK.\n\n```python\nimport base64, hashlib, time\nfrom urllib.parse import urlsplit, urlencode, parse_qsl, quote\nfrom nacl.signing import SigningKey\nimport requests\n\nKEY_ID = \"<uuid from Settings → API Keys>\"\nPRIVATE_KEY_B64 = \"<base64 private key shown once at creation>\"\nBASE_URL = \"https://api.rivermarkets.com/v1\"\n\nsigning_key = SigningKey(base64.b64decode(PRIVATE_KEY_B64))\n\n\ndef sign(method: str, url: str, body: bytes = b\"\") -> dict:\n    parts = urlsplit(url)\n    # quote_via=quote encodes spaces as %20 to match RFC 3986 / the server.\n    sorted_q = urlencode(sorted(parse_qsl(parts.query, keep_blank_values=True)), quote_via=quote)\n    ts = str(int(time.time()))\n    canonical = \"\\n\".join([\n        method.upper(), parts.path, sorted_q, ts, hashlib.sha256(body).hexdigest(),\n    ]).encode()\n    sig = signing_key.sign(canonical).signature\n    return {\n        \"X-River-Key-Id\": KEY_ID,\n        \"X-River-Timestamp\": ts,\n        \"X-River-Signature\": base64.b64encode(sig).decode(),\n    }\n\n\nurl = f\"{BASE_URL}/markets/search?q=shutdown&exchange=POLYMARKET\"\nresponse = requests.get(url, headers=sign(\"GET\", url))\nfor market in response.json()[\"results\"]:\n    print(f\"River ID: {market['river_id']}, Ticker: {market['slug']}\")\n```\n\n## 5. Set Up a Subaccount\n\nRiver allows users to setup subaccounts - which allow them to manage different trading strategies or client portfolios.\n\nThese can be added through the UI by going to Settings -> Subaccounts\nor programatically.\n\n### Video Walkthrough\n\nWatch this tutorial to see how to create a subaccount, add a Polymarket account, and place your first trade:\n\n<div style=\"position: relative; padding-bottom: 54.37499999999999%; height: 0;\"><iframe src=\"https://www.loom.com/embed/9b49e269c09e436d98b72f3cb55d7691\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%;\"></iframe></div>\n\n### Programmatic Setup \n\n```python\n# Create a subaccount\nresponse = requests.post(\n    f\"{BASE_URL}/subaccounts\",\n    headers=headers,\n    json={\"name\": \"My Trading Account\"}\n)\nsubaccount = response.json()\nsubaccount_id = subaccount[\"id\"]\n```\n\n## 6. Add Exchange Credentials\n\nExchange credentials can also be added via UI under Settings -> Subaccounts,\nor programatically as shown below.\n\nFor best results, we recommend\n- Polymarket : create an account using email (not a wallet) and get your wallet and PK directly from Polymarket under [Settings -> Export Private Key](https://polymarket.com/settings)\n- Kalshi : create a secret/key pair with Read/Write access under [Settings -> Account & security -> API keys](https://kalshi.com/account/profile)\n\n```python\n# Add Polymarket credentials\nresponse = requests.post(\n    f\"{BASE_URL}/credentials\",\n    headers=headers,\n    json={\n        \"subaccount_id\": subaccount_id,\n        \"exchange\": \"polymarket\",\n        \"wallet_address\": \"your_polymarket_wallet_address\",\n        \"private_key\": \"your_polymarket_private_key\"\n    }\n)\n# Add Kalshi credentials\nresponse = requests.post(\n    f\"{BASE_URL}/credentials\",\n    headers=headers,\n    json={\n        \"subaccount_id\": subaccount_id,\n        \"exchange\": \"kalshi\",\n        \"api_key\": \"your_kalshi_api_key\",\n        \"api_secret\": \"your_kalshi_secret\"\n    }\n)\n```\n\nWe use asymmetric encryption so your credentials are not transferred between services or stored in plain text.\nWe delete your credentials when you delete a subaccount. \n\n## 7. Place Your First Order\n\nUse the River ID from your market search to place an order.\n\n```python\n# Place a limit order (buy 10 contracts at $0.50)\nresponse = requests.post(\n    f\"{BASE_URL}/orders\",\n    headers=headers,\n    json={\n        \"subaccount_id\": subaccount_id,\n        \"river_id\": 4552150,       # From market search\n        \"order_type\": \"LIMIT\",      # LIMIT or MARKET\n        \"time_in_force\": \"GTC\",     # FOK, GTC, GTD, or IOC\n        \"buy_flag\": True,           # True=buy, False=sell\n        \"price\": 0.50,              # Limit price (0-1)\n        \"qty\": 10,                  # Number of contracts\n    }\n)\norder = response.json()\nprint(f\"Order placed: {order['river_order_id']}\")\n```\n\n## 8. Check Order Status\n\nMonitor your order's progress by fetching its current state.\n\n```python\n# Get order status\norder_id = order['river_order_id']\nresponse = requests.get(\n    f\"{BASE_URL}/orders/{order_id}\",\n    headers=headers\n)\norder_status = response.json()\nprint(f\"Status: {order_status['status']}, Filled: {order_status['traded_qty']}/{order_status['qty']}\")\n```\n\nPossible order statuses:\n- `pending_submission` - Order received, awaiting processing\n- `resting` - Order live on the exchange (may include partially-filled live orders)\n- `filled` - Terminal: order fully executed\n- `partially_filled` - Terminal: order cancelled with some quantity filled\n- `cancelled` - Terminal: order cancelled with no fills\n- `rejected` - Order rejected (see `reject_reason`)\n\n## 9. Cancel an Order\n\nCancel a resting order before it's fully filled.\n\n```python\n# Cancel an order\norder_id = order['river_order_id']\nresponse = requests.delete(\n    f\"{BASE_URL}/orders/{order_id}\",\n    headers=headers\n)\nif response.status_code == 200:\n    print(\"Order cancelled successfully\")\n```\n\nNote: Only orders with status `pending_submission` or `resting` can be cancelled (`partially_filled` is terminal).\n\n## Supported Exchanges\n\n| Exchange | Markets | Status |\n|----------|---------|--------|\n| Kalshi | US regulated prediction markets | Available |\n| Polymarket | Crypto prediction markets | Available |\n| Polymarket US | US regulated prediction markets | Available |\n| Novig | US regulated prediction markets | Coming soon |\n| Rothera | US regulated prediction markets | Future integration |\n\n## Rate Limits\n\n- **Standard**: 10 requests/second\n- **Premium**: Contact support for higher limits\n\n\n\n## Authentication\n\nAll endpoints require authentication via one of:\n- **Bearer Token**: `Authorization: Bearer <jwt_token>` (for web clients)\n- **Signed Request** (programmatic access): three headers per REST request, or\n  three query params on the WebSocket handshake.\n\n> **Using the SDK?** `rivermarkets` (Python) \n> sign every REST request and WS handshake for you. You only need the raw\n> recipes below if you're integrating without an SDK.\n\n### REST signing\n\nSend three headers on every request:\n- `X-River-Key-Id`: UUID of your API key\n- `X-River-Timestamp`: current unix seconds (must be within 30s of server time)\n- `X-River-Signature`: base64 Ed25519 signature over the canonical request\n\nThe REST canonical string is LF-joined:\n```\nMETHOD\\nPATH\\nSORTED_QUERY\\nTIMESTAMP\\nSHA256(body) hex\n```\n\n```python\nimport base64, hashlib, time\nfrom urllib.parse import urlsplit, urlencode, parse_qsl, quote\nfrom nacl.signing import SigningKey\n\nsigning_key = SigningKey(base64.b64decode(PRIVATE_KEY_B64))\n\ndef sign(method: str, url: str, body: bytes = b\"\") -> dict:\n    parts = urlsplit(url)\n    # quote_via=quote encodes spaces as %20 to match RFC 3986 / the server.\n    sorted_q = urlencode(sorted(parse_qsl(parts.query, keep_blank_values=True)), quote_via=quote)\n    ts = str(int(time.time()))\n    canonical = \"\\n\".join([\n        method.upper(), parts.path, sorted_q, ts, hashlib.sha256(body).hexdigest(),\n    ]).encode()\n    sig = signing_key.sign(canonical).signature\n    return {\n        \"X-River-Key-Id\": KEY_ID,\n        \"X-River-Timestamp\": ts,\n        \"X-River-Signature\": base64.b64encode(sig).decode(),\n    }\n```\n\n### WebSocket signing\n\nBrowsers can't set custom headers on the WS upgrade, so the same three values\nmove to query params: `?key_id=&ts=&sig=`. The WS canonical string omits the\nbody hash and uses the literal `\"WS\"` as the method:\n```\nWS\\nPATH\\nSORTED_QUERY (excluding key_id/ts/sig)\\nTIMESTAMP\n```\n\n```python\nimport asyncio, base64, time\nfrom urllib.parse import urlencode, quote\nimport websockets\nfrom nacl.signing import SigningKey\n\nsigning_key = SigningKey(base64.b64decode(PRIVATE_KEY_B64))\n\n\ndef sign_ws(path: str, extra_params: dict | None = None) -> str:\n    \"\"\"Return a fully-formed wss:// URL with signing query params appended.\"\"\"\n    params = dict(extra_params or {})\n    sorted_q = urlencode(sorted(params.items()), quote_via=quote)\n    ts = str(int(time.time()))\n    canonical = \"\\n\".join([\"WS\", path, sorted_q, ts]).encode()\n    sig = base64.b64encode(signing_key.sign(canonical).signature).decode()\n    params.update({\"key_id\": KEY_ID, \"ts\": ts, \"sig\": sig})\n    return f\"wss://api.rivermarkets.com{path}?{urlencode(params)}\"\n\n\nasync def stream_orders(subaccount_id: str):\n    url = sign_ws(\"/v1/ws/orders\", {\"subaccount_id\": subaccount_id})\n    async with websockets.connect(url) as ws:\n        async for frame in ws:\n            print(frame)\n\n\nasyncio.run(stream_orders(\"411b3f8c-85f9-41c9-90b7-3ff6d74efc4f\"))\n```\n\n### Security notes\n\n- Your private key never traverses the wire. Generate a keypair at\n  `Settings → API Keys`; the private key is shown once.\n- Same signature cannot be submitted twice within 60 seconds (replay protection).\n  On network retries, re-sign with a fresh timestamp.\n- Timestamps must be within 30s of server time. Sync your clock via NTP.\n\n\n---\n\n\n\n# Order Types Documentation\n\nComplete guide to all order types available in the River Markets trading platform.\n\n---\n\n## Basic Order Types\n\n### Market Order\nExecutes immediately at the best available price.\n- **Use case**: When you need immediate execution and price is less important\n- **Example**: Market buy 100 contracts → fills at current best ask price\n\n### Limit Order\nRests on the order book at a specified price.\n- **Use case**: When you want price control and can wait for execution\n- **Example**: Limit buy 100 @ $0.65 → only fills at $0.65 or better\n\n---\n\n## Conditional Order Types\n\nConditional orders are **not placed immediately**. They activate (\"trigger\") when specific conditions are met.\n\n### 1. Stop Orders (STOP)\n\n**Stop orders trigger when price moves AGAINST your desired direction.** Used primarily for **stop losses** (exit protection) or **breakout entries**.\n\n#### Stop Market\n- **Triggers**: When market trades at or through your stop price\n- **Executes**: As a market order (immediate fill at best available price)\n- **Example**:\n  ```\n  You're LONG at $0.70, want to exit if price falls to $0.60\n  → Stop Market SELL @ $0.60\n  → Triggers when price ≤ $0.60\n  → Sends market sell order → fills immediately\n  ```\n\n#### Stop Limit\n- **Triggers**: When market trades at or through your stop price\n- **Executes**: As a limit order at your specified limit price\n- **Example**:\n  ```\n  You're LONG at $0.70, want to exit around $0.60 but not worse than $0.59\n  → Stop Limit SELL @ $0.60, Limit $0.59\n  → Triggers when price ≤ $0.60\n  → Sends limit sell order @ $0.59 → waits for fill at $0.59 or better\n  ```\n- **Risk**: May not fill if price moves too fast through your limit\n\n**Directional Logic:**\n- **BUY stop**: Triggers at or **above** stop price (breakout entry or short exit)\n- **SELL stop**: Triggers at or **below** stop price (stop loss or long exit)\n\n---\n\n### 2. Reverse Stop Orders (REVERSE_STOP)\n\n**Reverse stop orders trigger when price moves IN your desired direction.** Used exclusively for **take profit** scenarios.\n\n**Key Concept**: A \"reverse stop\" is called \"reverse\" because it triggers in the OPPOSITE direction of a normal stop order.\n\n#### Reverse Stop Market (TP Market)\n- **Triggers**: When market trades at or through your target price (OPPOSITE direction from normal stop)\n- **Executes**: As a market order\n- **Example**:\n  ```\n  You're LONG at $0.60, want to take profit if price rises to $0.80\n  → TP Market (Reverse Stop Market) SELL @ $0.80\n  → Normal stop would trigger BELOW, but reverse stop triggers ABOVE\n  → Triggers when price ≥ $0.80\n  → Sends market sell order → fills immediately\n  ```\n\n**Directional Logic (REVERSED from normal stop):**\n- **BUY reverse stop**: Triggers at or **below** target (opposite of normal buy stop)\n- **SELL reverse stop**: Triggers at or **above** target (opposite of normal sell stop)\n\n**Why \"reverse\"?**\n- Normal **SELL stop** @ $0.60 triggers when price ≤ $0.60 (price falling)\n- **SELL reverse stop** @ $0.80 triggers when price ≥ $0.80 (price rising)\n- The trigger direction is reversed!\n\n#### Reverse Stop Limit (TP Limit)\n- **Triggers**: When market trades at or through your target price\n- **Executes**: As a limit order at your specified limit price\n- **Example**:\n  ```\n  You're LONG at $0.60, want to take profit around $0.80 but not worse than $0.79\n  → TP Limit (Reverse Stop Limit) SELL @ $0.80, Limit $0.79\n  → Triggers when price ≥ $0.80\n  → Sends limit sell order @ $0.79 → waits for fill at $0.79 or better\n  ```\n\n---\n\n### 3. Take Profit Orders (TP)\n\n**Parent-child orders**: Automatically triggers a child order when a parent order **fills**.\n\n#### TP Market\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Immediately places the child order (can be another TP/SL or direct order)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH TP Market @ $0.80\n  → When buy fills → immediately activates TP Market SELL @ $0.80\n  → That TP Market is a reverse stop that triggers when price ≥ $0.80\n  ```\n\n#### TP Limit\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Activates TP Limit order (reverse stop limit)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH TP Limit @ $0.80 (limit $0.79)\n  → When buy fills → activates TP Limit SELL\n  → Triggers when price ≥ $0.80 → sends limit sell @ $0.79\n  ```\n\n---\n\n### 4. Stop Loss Orders (SL)\n\n**Parent-child orders**: Automatically triggers a child order when a parent order **fills**.\n\n#### SL Market\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Immediately places the child order (can be another SL/TP or direct order)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH SL Market @ $0.55\n  → When buy fills → immediately activates SL Market SELL @ $0.55\n  → That SL Market is a stop order that triggers when price ≤ $0.55\n  ```\n\n#### SL Limit\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Activates SL Limit order (stop limit)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH SL Limit @ $0.55 (limit $0.54)\n  → When buy fills → activates SL Limit SELL\n  → Triggers when price ≤ $0.55 → sends limit sell @ $0.54\n  ```\n\n---\n\n## Order Type Comparison\n\n| Type | Trigger Condition | Execution | Primary Use Case |\n|------|------------------|-----------|------------------|\n| **Market** | None (immediate) | Immediate at best price | Need immediate fill |\n| **Limit** | None (rests) | At limit price or better | Want price control |\n| **Stop Market** | Price moves AGAINST you | Market order (immediate) | Stop loss, breakout entry |\n| **Stop Limit** | Price moves AGAINST you | Limit order (may not fill) | Stop loss with price protection |\n| **TP Market** | Parent fills + price moves FOR you | Market order via reverse stop | Take profit with immediate exit |\n| **TP Limit** | Parent fills + price moves FOR you | Limit order via reverse stop | Take profit with price control |\n| **SL Market** | Parent fills + price moves AGAINST you | Market order via stop | Stop loss from entry |\n| **SL Limit** | Parent fills + price moves AGAINST you | Limit order via stop | Stop loss with price floor |\n\n---\n\n## Key Concepts\n\n### Stop vs Reverse Stop\n- **Stop**: Triggers when price moves AGAINST you (exit losses, enter breakouts)\n- **Reverse Stop**: Triggers when price moves FOR you (take profits)\n\n### Parent-Child Orders\n- **TP/SL orders** are \"meta-orders\" that activate child orders when a parent fills\n- The child order itself is usually a stop or reverse stop order\n- This creates a two-step process: Parent fill → Child activation → Price trigger → Execution\n\n### Trigger Direction Summary\n| Order Side | Stop (Loss/Breakout) | Reverse Stop (Profit) |\n|------------|---------------------|----------------------|\n| **BUY** | Triggers ≥ stop price | Triggers ≤ target price |\n| **SELL** | Triggers ≤ stop price | Triggers ≥ target price |\n\n---\n\n## Examples\n\n### Complete Trading Scenario\n```\n1. Place limit BUY 100 @ $0.60\n   WITH TP Market @ $0.80 (reverse stop)\n   AND SL Market @ $0.55 (normal stop)\n\n2. Buy fills at $0.60\n   → TP Market SELL @ $0.80 activated (reverse stop)\n   → SL Market SELL @ $0.55 activated (normal stop)\n\n3a. If price rises to $0.80:\n    → TP triggers (price ≥ $0.80) → market sell executes\n    → SL cancelled automatically\n\n3b. If price falls to $0.55:\n    → SL triggers (price ≤ $0.55) → market sell executes\n    → TP cancelled automatically\n```\n\n### Breakout Entry with Protection\n```\nPrice is at $0.70, resistance at $0.75, support at $0.65\n\n1. Place Stop Market BUY @ $0.76 (breakout entry)\n   → Triggers when price ≥ $0.76 (breaks resistance)\n   → Market buy executes\n\n2. Add SL Market @ $0.74 to the stop order\n   → When breakout buy fills → SL activates\n   → Protects if breakout fails\n```\n\n\n\nContact Support:\n Name: River Markets",
+      "type": "text/plain"
+    }
+  }
+}

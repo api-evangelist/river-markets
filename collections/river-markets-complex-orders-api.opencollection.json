@@ -1,0 +1,165 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance complex-orders API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "complex-orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Complex Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/complex-orders",
+            "params": [
+              {
+                "name": "complex_order_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by complex order type: CONDITIONAL, TWAP, ICEBERG, PEG."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status name. Interpreted per complex_order_type (ConditionalOrderStatus for CONDITIONAL, IcebergOrderStatus for ICEBERG, PegOrderStatus for PEG). Unknown names for the active type are ignored."
+              },
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by instrument ID"
+              },
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by generic asset basket ID"
+              },
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter to a specific subaccount"
+              },
+              {
+                "name": "complex_order_ids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by complex order IDs"
+              },
+              {
+                "name": "parent_river_order_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by parent order ID"
+              },
+              {
+                "name": "unparented_only",
+                "value": "",
+                "type": "query",
+                "description": "When true, only return conditional orders with no parent_river_order_id (standalone stops). Ignored for non-conditional types."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Results per page (max 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Pagination offset"
+              }
+            ]
+          },
+          "docs": "List complex orders (conditional and iceberg) with optional filters.\n\nReturns a dict keyed by complex order type (`conditional_orders`,\n`iceberg_orders`). Use `complex_order_type` to restrict to one type."
+        },
+        {
+          "info": {
+            "name": "Create Complex Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/complex-orders",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new complex order (conditional or iceberg).\n\nProvide exactly one of `conditional_order_params` (TP/SL/STOP) or\n`iceberg_order_params`. The body shape determines the complex_order_type.\n\nReturns 202 Accepted with the persisted complex order in PENDING status,\nenqueued for activation by the appropriate consumer service."
+        },
+        {
+          "info": {
+            "name": "Cancel All Complex Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.rivermarkets.com/v1/complex-orders/cancel-all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancel all cancellable complex orders (conditional and iceberg) for a subaccount.\n\nReturns the list of complex_order_ids that were submitted for cancellation."
+        },
+        {
+          "info": {
+            "name": "Get Complex Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/complex-orders/:complex_order_id",
+            "params": [
+              {
+                "name": "complex_order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a single complex order by ID (conditional or iceberg)."
+        },
+        {
+          "info": {
+            "name": "Cancel Complex Order",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.rivermarkets.com/v1/complex-orders/:complex_order_id",
+            "params": [
+              {
+                "name": "complex_order_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Cancel a single complex order (conditional or iceberg).\n\nReturns 202 Accepted. Cancellation is processed asynchronously by the\nappropriate consumer service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

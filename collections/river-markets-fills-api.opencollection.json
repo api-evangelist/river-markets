@@ -1,0 +1,69 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance fills API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "fills",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Fills",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/fills",
+            "params": [
+              {
+                "name": "subaccount_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "end_time",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Fetch fills/trades for the user's subaccounts.\n\nReturns fills grouped by subaccount, filterable by instrument and time range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance prices API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "prices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/prices/:river_id/volume",
+            "params": [
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "path",
+                "description": "River market ID"
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Lookback window"
+              }
+            ]
+          },
+          "docs": "Traded volume over a recent window, summed from our captured trade prints\n(all exchanges write to `trade_prints`). 1 contract traded = $1 of volume.\nSummed from the raw hypertable rather than the OHLC continuous aggregates\nso the most recent minutes are always included."
+        },
+        {
+          "info": {
+            "name": "Get Volume Batch",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/prices/volume",
+            "params": [
+              {
+                "name": "river_ids",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated list of river IDs"
+              },
+              {
+                "name": "window",
+                "value": "",
+                "type": "query",
+                "description": "Lookback window"
+              }
+            ]
+          },
+          "docs": "Batch variant of the windowed-volume endpoint for grid views (multibook):\none grouped scan of `trade_prints` instead of a request per market.\nMarkets with no prints in the window come back with volume 0."
+        },
+        {
+          "info": {
+            "name": "Get Prices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/prices/:river_id",
+            "params": [
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "path",
+                "description": "River market ID"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Response type"
+              },
+              {
+                "name": "interval",
+                "value": "",
+                "type": "query",
+                "description": "Time range"
+              },
+              {
+                "name": "fidelity",
+                "value": "",
+                "type": "query",
+                "description": "Minutes per data point (for Polymarket history)"
+              }
+            ]
+          },
+          "docs": "Get price data for a market.\nReturns either candlestick OHLC data or simple price history based on the `type` parameter.\nThe endpoint automatically determines the exchange and fetches data accordingly.\n\n- **Kalshi**: Returns real OHLC candlestick data with volume\n- **Polymarket**: Returns price history (candlesticks will have synthetic OHLC where all values equal the price)\n\nAll prices are normalized to 0-1 range."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

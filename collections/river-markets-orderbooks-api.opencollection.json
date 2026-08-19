@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "River Markets balance orderbooks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-River-Key-Id",
+      "value": "{{X-River-Key-Id}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "orderbooks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Generic Asset Orderbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/orderbooks/generic-asset/:generic_asset_id",
+            "params": [
+              {
+                "name": "generic_asset_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query",
+                "description": "Number of price levels to return"
+              }
+            ]
+          },
+          "docs": "Get merged orderbook for a generic asset (basket).\n\nFetches orderbooks for all member instruments and merges them by summing\nquantity at each price level. Touch mechanism ensures subscriptions are active."
+        },
+        {
+          "info": {
+            "name": "Get Orderbook",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.rivermarkets.com/v1/orderbooks/:river_id",
+            "params": [
+              {
+                "name": "river_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "levels",
+                "value": "",
+                "type": "query",
+                "description": "Number of price levels to return"
+              }
+            ]
+          },
+          "docs": "Get orderbook for a river_id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

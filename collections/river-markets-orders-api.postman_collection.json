@@ -1,0 +1,1289 @@
+{
+  "item": [
+    {
+      "id": "9c7ffb10-b07d-4438-999c-1f68e40c1d2a",
+      "name": "orders",
+      "description": {
+        "content": "Place and manage orders on prediction market exchanges.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bd7ca95b-a62f-4f52-89d2-e497da3f04f5",
+          "name": "Create Order",
+          "request": {
+            "name": "Create Order",
+            "description": {
+              "content": "Place a new order.\n\nSubmits an order for asynchronous processing. The order is persisted immediately\nand queued for execution on the target exchange.\n\nSee  [Orders](https://docs.rivermarkets.com/concepts/orders) and [Order Types](https://docs.rivermarkets.com/concepts/order-types) for more information.\n\n**Asset Selection:**\nProvide exactly one of `river_id` (standard instrument) or `generic_asset_id` (user-defined basket).\nGeneric asset orders only support `MARKET` order type — the system automatically routes\nIOC limit orders to each underlying instrument at optimal prices.\n\n**Response:**\nReturns `202 Accepted` with the order_id and associated complex_orders ids (TP/SL).\nPoll `GET /v1/orders/{order_id}` or use webhooks to track execution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"order_type\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"qty\": \"<number>\",\n  \"buy_flag\": \"<boolean>\",\n  \"subaccount_id\": \"<uuid>\",\n  \"price\": \"<number>\",\n  \"post_only\": false,\n  \"cancel_order_on_pause\": true,\n  \"river_id\": \"<integer>\",\n  \"generic_asset_id\": \"<uuid>\",\n  \"expiry_ts_utc\": \"<dateTime>\",\n  \"conditional_orders_params\": [\n    {\n      \"conditional_order_type\": \"<string>\",\n      \"trigger_order\": {\n        \"order_type\": \"<string>\",\n        \"qty\": \"<number>\",\n        \"buy_flag\": \"<boolean>\",\n        \"price\": \"<number>\",\n        \"stop_order_price\": \"<number>\"\n      },\n      \"stop_order_price\": \"<number>\",\n      \"parent_river_order_id\": \"<uuid>\",\n      \"parent_complex_order_id\": \"<uuid>\"\n    },\n    {\n      \"conditional_order_type\": \"<string>\",\n      \"trigger_order\": {\n        \"order_type\": \"<string>\",\n        \"qty\": \"<number>\",\n        \"buy_flag\": \"<boolean>\",\n        \"price\": \"<number>\",\n        \"stop_order_price\": \"<number>\"\n      },\n      \"stop_order_price\": \"<number>\",\n      \"parent_river_order_id\": \"<uuid>\",\n      \"parent_complex_order_id\": \"<uuid>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c78b0f0-9f54-45b4-b9ae-8ccaa763695b",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_type\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"qty\": \"<number>\",\n  \"buy_flag\": \"<boolean>\",\n  \"subaccount_id\": \"<uuid>\",\n  \"price\": \"<number>\",\n  \"post_only\": false,\n  \"cancel_order_on_pause\": true,\n  \"river_id\": \"<integer>\",\n  \"generic_asset_id\": \"<uuid>\",\n  \"expiry_ts_utc\": \"<dateTime>\",\n  \"conditional_orders_params\": [\n    {\n      \"conditional_order_type\": \"SL\",\n      \"trigger_order\": {\n        \"order_type\": \"MARKET\",\n        \"qty\": 9442.96574020357,\n        \"buy_flag\": true,\n        \"price\": null,\n        \"stop_order_price\": null\n      },\n      \"stop_order_price\": null,\n      \"parent_river_order_id\": \"f2632319-df67-714c-34e5-d88f198eec8d\",\n      \"parent_complex_order_id\": \"61cf3c9e-286a-72b0-0e50-c144ce5afad4\"\n    },\n    {\n      \"conditional_order_type\": \"STOP\",\n      \"trigger_order\": {\n        \"order_type\": \"LIMIT\",\n        \"qty\": 3425.3206124128455,\n        \"buy_flag\": false,\n        \"price\": null,\n        \"stop_order_price\": null\n      },\n      \"stop_order_price\": null,\n      \"parent_river_order_id\": \"2d506e4e-c07a-26e6-b443-7385ffd720f8\",\n      \"parent_complex_order_id\": \"0ba4bd27-d1c8-88d4-7c3d-42a553b5d134\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"river_order_id\": \"a3897441-8f8f-ac67-d344-9335f8e23a65\",\n  \"complex_orders\": {\n    \"key_0\": [\n      \"c483c9ef-6171-c683-428c-141bd50d6209\",\n      \"d9f46972-df42-f848-1f2a-aad3af944bbf\"\n    ],\n    \"key_1\": [\n      \"c3480100-c420-b37f-957e-99fdf41f7268\",\n      \"4d35f6d8-9f52-0ca5-f5a7-c05a1a7dd15e\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b44539ca-8cb2-4697-8656-484be2ff461d",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"order_type\": \"<string>\",\n  \"time_in_force\": \"<string>\",\n  \"qty\": \"<number>\",\n  \"buy_flag\": \"<boolean>\",\n  \"subaccount_id\": \"<uuid>\",\n  \"price\": \"<number>\",\n  \"post_only\": false,\n  \"cancel_order_on_pause\": true,\n  \"river_id\": \"<integer>\",\n  \"generic_asset_id\": \"<uuid>\",\n  \"expiry_ts_utc\": \"<dateTime>\",\n  \"conditional_orders_params\": [\n    {\n      \"conditional_order_type\": \"SL\",\n      \"trigger_order\": {\n        \"order_type\": \"MARKET\",\n        \"qty\": 9442.96574020357,\n        \"buy_flag\": true,\n        \"price\": null,\n        \"stop_order_price\": null\n      },\n      \"stop_order_price\": null,\n      \"parent_river_order_id\": \"f2632319-df67-714c-34e5-d88f198eec8d\",\n      \"parent_complex_order_id\": \"61cf3c9e-286a-72b0-0e50-c144ce5afad4\"\n    },\n    {\n      \"conditional_order_type\": \"STOP\",\n      \"trigger_order\": {\n        \"order_type\": \"LIMIT\",\n        \"qty\": 3425.3206124128455,\n        \"buy_flag\": false,\n        \"price\": null,\n        \"stop_order_price\": null\n      },\n      \"stop_order_price\": null,\n      \"parent_river_order_id\": \"2d506e4e-c07a-26e6-b443-7385ffd720f8\",\n      \"parent_complex_order_id\": \"0ba4bd27-d1c8-88d4-7c3d-42a553b5d134\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3d67e76-5e62-467e-bebe-f33a688ea754",
+          "name": "List Orders",
+          "request": {
+            "name": "List Orders",
+            "description": {
+              "content": "List orders with optional filters.\n\nReturns a paginated list of orders across all accessible subaccounts, ordered by `created_at` descending.\n\n**Filters:**\nAll filters are optional and can be combined. If no `subaccount_id` is specified,\nreturns orders from all subaccounts the user has access to.\n\n**Order Statuses:**\n- `PENDING_SUBMISSION`: Order received, awaiting exchange submission.\n- `PROCESSING`: Being processed by the order consumer.\n- `RESTING`: Live on the exchange order book (may include partially-filled live orders).\n- `EXECUTED`: Terminal — fully filled.\n- `PARTIALLY_FILLED`: Terminal — cancelled with some quantity filled.\n- `CANCELLED`: Terminal — cancelled with no fills.\n- `REJECTED`: Rejected by exchange (see order details for reason).\n\n**Aggregated Fields:**\nEach order includes `traded_qty`, `average_price`, and `fees_paid` computed from fills.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Filter by order status. Accepts a single OrderStatus name (e.g. 'RESTING') or the meta-value 'ACTIVE' which resolves to RESTING."
+                },
+                {
+                  "disabled": false,
+                  "key": "river_id",
+                  "value": "<integer>",
+                  "description": "Filter by instrument ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "generic_asset_id",
+                  "value": "<uuid>",
+                  "description": "Filter by generic asset ID"
+                },
+                {
+                  "disabled": false,
+                  "key": "subaccount_id",
+                  "value": "<uuid>",
+                  "description": "Filter to a specific subaccount"
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_iceberg_order_id",
+                  "value": "<uuid>",
+                  "description": "Filter to child tranches of a specific iceberg parent."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_peg_order_id",
+                  "value": "<uuid>",
+                  "description": "Filter to child tranches of a specific peg parent."
+                },
+                {
+                  "disabled": false,
+                  "key": "parent_smart_taker_order_id",
+                  "value": "<uuid>",
+                  "description": "Filter to IOC children of a specific smart-taker parent."
+                },
+                {
+                  "disabled": false,
+                  "key": "buy_flag",
+                  "value": "<boolean>",
+                  "description": "Filter by direction: true=buys, false=sells"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Free-text search across the order's market: ticker/slug, the human-readable question (event title, market name, outcome) via full-text + substring match, plus the order's river_id / order id / generic asset id. Applied server-side over all matching orders, not just the current page."
+                },
+                {
+                  "disabled": false,
+                  "key": "show_tp_sl_active",
+                  "value": "false",
+                  "description": "When true, complex_order_ids only includes attached TP/SL orders with status PENDING or ACTIVE."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "Results per page (max 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Pagination offset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d51a1c0-35c7-46df-a393-37290b5cbf75",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "river_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "generic_asset_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "subaccount_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "parent_iceberg_order_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "parent_peg_order_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "parent_smart_taker_order_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "buy_flag",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_tp_sl_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"orders\": [\n    {\n      \"river_order_id\": \"3054f884-c0e5-cd83-d16c-b12a9a462131\",\n      \"order_type\": \"string\",\n      \"time_in_force\": \"string\",\n      \"qty\": 1435.7100272948608,\n      \"buy_flag\": true,\n      \"status\": \"string\",\n      \"subaccount_id\": \"89d0bec9-ca3c-4373-8b45-7487fc804937\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"complex_order_ids\": {\n        \"key_0\": [\n          \"9fd1e2c6-f56f-e3f1-0c00-3548afe91724\",\n          \"bf2f40be-5778-1092-159b-634906ecb1c9\"\n        ],\n        \"key_1\": [\n          \"9a9bf56e-bcdc-d1de-95e9-2827479e336f\",\n          \"42d9396d-8567-c597-8a54-393d3471a75b\"\n        ],\n        \"key_2\": [\n          \"3bc5658e-a0b4-f2fb-85c6-1a66938be3c5\",\n          \"4b03eb5e-dd92-e453-b63e-fd399d3bd34e\"\n        ],\n        \"key_3\": [\n          \"ad1fd12a-e6cb-8bd3-dca8-7e35ce24716b\",\n          \"7c392d3b-812c-b7da-cf84-3fdc86a00e92\"\n        ]\n      },\n      \"price\": 6785.073114632939,\n      \"post_only\": false,\n      \"cancel_order_on_pause\": true,\n      \"river_id\": 9059,\n      \"generic_asset_id\": \"cc6ae90d-99b3-e5a5-ba11-1c7b5f5fd450\",\n      \"expiry_ts_utc\": \"string\",\n      \"traded_qty\": 0,\n      \"average_price\": 8259.789466170934,\n      \"fees_paid\": 0,\n      \"reject_reason\": \"string\",\n      \"parent_iceberg_order_id\": \"ff484c53-af93-76a3-26c4-8741c0eca22f\",\n      \"parent_peg_order_id\": \"b036c0da-a090-ed11-0ff4-42f846bbaefd\",\n      \"parent_smart_taker_order_id\": \"98afbee2-1627-7afb-28b6-0fefde5ef458\"\n    },\n    {\n      \"river_order_id\": \"5552e5dd-0477-1f73-73cf-e33bd0d21533\",\n      \"order_type\": \"string\",\n      \"time_in_force\": \"string\",\n      \"qty\": 8765.940091194543,\n      \"buy_flag\": true,\n      \"status\": \"string\",\n      \"subaccount_id\": \"162a2b30-3ac8-b420-0d4a-67c4f260dcb7\",\n      \"created_at\": \"string\",\n      \"updated_at\": \"string\",\n      \"complex_order_ids\": {\n        \"key_0\": [\n          \"e7576604-651c-cc25-3866-5301df3ee442\",\n          \"85397688-e3ee-564b-d9e9-33a002dd13da\"\n        ],\n        \"key_1\": [\n          \"809203c0-b598-f209-ea36-a0e721f5c58d\",\n          \"f0160c8a-ac02-11b1-ebdc-1223f4228220\"\n        ],\n        \"key_2\": [\n          \"78b10f7f-5188-fca7-482c-c9288330de8c\",\n          \"32842437-cc3e-bd11-f8a5-cad5af77d43f\"\n        ],\n        \"key_3\": [\n          \"dc52f1c3-1bbf-a551-3e9d-eeaa6f2009b7\",\n          \"fb1f3b74-b3a7-965b-59e2-25a977e4ea35\"\n        ]\n      },\n      \"price\": 4168.604600966476,\n      \"post_only\": false,\n      \"cancel_order_on_pause\": true,\n      \"river_id\": 2437,\n      \"generic_asset_id\": \"0a8224b3-ece7-ef9b-c919-cbbe01fa5331\",\n      \"expiry_ts_utc\": \"string\",\n      \"traded_qty\": 0,\n      \"average_price\": 4468.688602524431,\n      \"fees_paid\": 0,\n      \"reject_reason\": \"string\",\n      \"parent_iceberg_order_id\": \"ea1cbf2b-5e76-9f09-92e2-68fc0931be9d\",\n      \"parent_peg_order_id\": \"76a23dc5-6cb4-2c9c-301c-d6769ae32155\",\n      \"parent_smart_taker_order_id\": \"83031f31-65a9-b9d5-e9cd-afc8bc4b1225\"\n    }\n  ],\n  \"count\": 4437\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fab8d2f-daaf-49f9-8a5c-006e4ec210eb",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "river_id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "generic_asset_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "subaccount_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "parent_iceberg_order_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "parent_peg_order_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "parent_smart_taker_order_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "buy_flag",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "show_tp_sl_active",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0af2fd7f-1833-46c2-83d9-8a740d8e0ec9",
+          "name": "Get Order",
+          "request": {
+            "name": "Get Order",
+            "description": {
+              "content": "Get a single order by ID with its fills.\n\nReturns complete order details including execution history.\n\n**Use Cases:**\n- Track order progress and execution quality\n- Reconcile fills for accounting\n- Debug rejected or partially filled orders",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "479c5adf-4065-4f40-9d7c-9d8c991143f3",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"river_order_id\": \"d131bded-33bb-9687-21e9-aa2dccacb75e\",\n  \"order_type\": \"string\",\n  \"time_in_force\": \"string\",\n  \"qty\": 5693.089742812356,\n  \"buy_flag\": false,\n  \"status\": \"string\",\n  \"subaccount_id\": \"62555fe2-5c99-bb9d-8eb1-0f8a9b1493fe\",\n  \"created_at\": \"string\",\n  \"updated_at\": \"string\",\n  \"complex_order_ids\": {\n    \"key_0\": [\n      \"8bf3789d-bb8e-9dc6-cb6c-671711268869\",\n      \"a599bef1-ca9f-1bda-bf49-9a27e5b42898\"\n    ],\n    \"key_1\": [\n      \"d6dbdb93-e5fe-1663-da8c-2c22058ff408\",\n      \"2d538926-600f-93e6-246e-61a467242496\"\n    ]\n  },\n  \"price\": 8953.758535529985,\n  \"post_only\": false,\n  \"cancel_order_on_pause\": true,\n  \"river_id\": 1326,\n  \"generic_asset_id\": \"1273317a-ab2c-4d96-29f3-90159e72d385\",\n  \"expiry_ts_utc\": \"string\",\n  \"traded_qty\": 0,\n  \"average_price\": 3848.9929097598765,\n  \"fees_paid\": 0,\n  \"reject_reason\": \"string\",\n  \"parent_iceberg_order_id\": \"6b67712f-d7fd-ee10-467f-fd12b6643de1\",\n  \"parent_peg_order_id\": \"eeca5895-2f5e-84e1-b9b3-11f79ac17cd2\",\n  \"parent_smart_taker_order_id\": \"d99a66ac-3ae3-fd5c-cfe8-ba57c37a9d35\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7f567a1-03b7-4785-a60d-8903a103f97f",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3fabb4d4-c060-4c16-8e99-e14d136c3c4f",
+          "name": "Cancel Order",
+          "request": {
+            "name": "Cancel Order",
+            "description": {
+              "content": "Cancel an existing order.\n\nRequest cancellation of an order.\nReturns 202 Accepted with order state - cancellation is processed asynchronously.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae6a597f-505e-4443-90be-d7e5389a93aa",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cancelled_river_order_ids\": [\n    \"e19dc0c0-590e-d2f3-cf15-6f235cb71334\",\n    \"f5ca54dc-6171-9334-aaa4-393a604c80e9\"\n  ],\n  \"failed_cancelled_reasons\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a24d8e15-35d7-44a4-9cb0-0b7cff066ad8",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b931343-8b02-47dc-9a79-911de402cf2a",
+          "name": "Edit Order",
+          "request": {
+            "name": "Edit Order",
+            "description": {
+              "content": "Edit (amend) a resting simple limit order.\n\nOnly `qty` and `price` are editable. `qty` is the new TOTAL quantity (not remaining).\nThe order must be RESTING, a simple order (no iceberg/peg parent), a single-instrument\nLIMIT order. Returns 202 Accepted; final status is delivered via the orders WS.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":order_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"qty\": \"<number>\",\n  \"price\": \"<number>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d2f51c1-b116-4f30-883a-b93fb7aa3bf2",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"qty\": \"<number>\",\n  \"price\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"river_order_id\": \"5e8b68fe-ae4e-9a05-0870-cbef5255a200\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a4d0a4a-ff03-43f7-a677-0f2f8f7fd669",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"qty\": \"<number>\",\n  \"price\": \"<number>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2235207-8da8-4f30-a165-336a1e2bc8f7",
+          "name": "Get Order Queue Position",
+          "request": {
+            "name": "Get Order Queue Position",
+            "description": {
+              "content": "Get the best (minimum) queue position across all exchange orders backing this river order.\n\nCurrently supported only for Kalshi-backed orders.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                ":order_id",
+                "queue-position"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "order_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cfa145e9-4755-4148-a899-19af805d6bb6",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "queue-position"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"river_order_id\": \"31ce6b1b-0075-06a8-ae2e-a3833060427b\",\n  \"exchange_order_id\": \"string\",\n  \"queue_position\": 5736.744954064099\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e961818f-e41f-45d4-8ab3-df3f4cb0dde3",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    ":order_id",
+                    "queue-position"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "order_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f06404b4-5270-488a-b40c-c645d7ce1e3a",
+          "name": "Cancel All Orders",
+          "request": {
+            "name": "Cancel All Orders",
+            "description": {
+              "content": "Cancel all open orders for a subaccount.\n\nIf `river_ids` is set, only orders on those instruments are cancelled;\nit must be omitted/null or non-empty. Cancellation is processed\nasynchronously by the order consumer.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "orders",
+                "cancel-all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subaccount_id\": \"<uuid>\",\n  \"river_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a352fa7a-f89f-4e0f-8588-5bf5dc840799",
+              "name": "Successful Response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "cancel-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subaccount_id\": \"<uuid>\",\n  \"river_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"cancelled_river_order_ids\": [\n    \"e19dc0c0-590e-d2f3-cf15-6f235cb71334\",\n    \"f5ca54dc-6171-9334-aaa4-393a604c80e9\"\n  ],\n  \"failed_cancelled_reasons\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e25d7432-477e-49f1-9334-6a2b026a7dc7",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "orders",
+                    "cancel-all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-River-Key-Id",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"subaccount_id\": \"<uuid>\",\n  \"river_ids\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\",\n      \"input\": {},\n      \"ctx\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.rivermarkets.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-River-Key-Id"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "874e9747-8753-4aca-93ff-5b17697a4c73",
+    "name": "River Markets balance orders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# Getting Started\n\n\nRiver Markets provides users with a unified prime brokerage interface for prediction markets, including\n- Liquidity aggregation\n- Order routing\n- Market and data search\n\nThis API guide will help you get up and running quickly.\n\n## Concepts\n\n### River IDs\n\nEvery market across all exchanges is assigned a unique **River ID** - a unified identifier that works across our entire platform. This allows you to:\n\n- Reference the same market consistently regardless of which exchange it trades on\n- Place orders using a single identifier format\n- Track positions and fills across exchanges with one ID\n\nWhen searching for markets, the API returns both the exchange-native identifier (e.g., Kalshi ticker, Polymarket slug) and the River ID. Use the River ID when placing orders.\n\n### Subaccounts\n\n**Subaccounts** let you organize your trading activity into separate containers. Each subaccount:\n\n- Has its own set of exchange credentials\n- Maintains separate positions and order history\n- Can represent different strategies, clients, or portfolios\n\nThis is useful for:\n- **Fund managers**: Segregate client portfolios\n- **Traders**: Separate strategies (e.g., momentum vs. mean reversion)\n- **Teams**: Give team members isolated trading environments\n\n## 1. Create an Account\n\nSign up at [app.rivermarkets.com](https://app.rivermarkets.com) to create your account.\n\n## 2. Generate an API Key\n\n1. Log in to your dashboard\n2. Navigate to **Settings → API Keys**\n3. Click **Create API Key**\n4. Copy and securely store your key - it will only be shown once\n\n## 3. Install required packages\n\n```python\npip install requests\n```\n\n## 4. Make Your First Request\n\nTest your API key by searching for markets.\n\nWe support ticker (kalshi ticker, polymarket condition_id/slug, river_id) and fuzzy search ('bitcoin', 'fed rates').\n\n> **Using the SDK?** `rivermarkets` (Python) \n> handle request signing for you — pass your `KEY_ID` and `PRIVATE_KEY` to the\n> client constructor and forget about the rest of this section. The raw example\n> below is for anyone integrating without an SDK.\n\n```python\nimport base64, hashlib, time\nfrom urllib.parse import urlsplit, urlencode, parse_qsl, quote\nfrom nacl.signing import SigningKey\nimport requests\n\nKEY_ID = \"<uuid from Settings → API Keys>\"\nPRIVATE_KEY_B64 = \"<base64 private key shown once at creation>\"\nBASE_URL = \"https://api.rivermarkets.com/v1\"\n\nsigning_key = SigningKey(base64.b64decode(PRIVATE_KEY_B64))\n\n\ndef sign(method: str, url: str, body: bytes = b\"\") -> dict:\n    parts = urlsplit(url)\n    # quote_via=quote encodes spaces as %20 to match RFC 3986 / the server.\n    sorted_q = urlencode(sorted(parse_qsl(parts.query, keep_blank_values=True)), quote_via=quote)\n    ts = str(int(time.time()))\n    canonical = \"\\n\".join([\n        method.upper(), parts.path, sorted_q, ts, hashlib.sha256(body).hexdigest(),\n    ]).encode()\n    sig = signing_key.sign(canonical).signature\n    return {\n        \"X-River-Key-Id\": KEY_ID,\n        \"X-River-Timestamp\": ts,\n        \"X-River-Signature\": base64.b64encode(sig).decode(),\n    }\n\n\nurl = f\"{BASE_URL}/markets/search?q=shutdown&exchange=POLYMARKET\"\nresponse = requests.get(url, headers=sign(\"GET\", url))\nfor market in response.json()[\"results\"]:\n    print(f\"River ID: {market['river_id']}, Ticker: {market['slug']}\")\n```\n\n## 5. Set Up a Subaccount\n\nRiver allows users to setup subaccounts - which allow them to manage different trading strategies or client portfolios.\n\nThese can be added through the UI by going to Settings -> Subaccounts\nor programatically.\n\n### Video Walkthrough\n\nWatch this tutorial to see how to create a subaccount, add a Polymarket account, and place your first trade:\n\n<div style=\"position: relative; padding-bottom: 54.37499999999999%; height: 0;\"><iframe src=\"https://www.loom.com/embed/9b49e269c09e436d98b72f3cb55d7691\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen allowfullscreen style=\"position: absolute; top: 0; left: 0; width: 100%; height: 100%;\"></iframe></div>\n\n### Programmatic Setup \n\n```python\n# Create a subaccount\nresponse = requests.post(\n    f\"{BASE_URL}/subaccounts\",\n    headers=headers,\n    json={\"name\": \"My Trading Account\"}\n)\nsubaccount = response.json()\nsubaccount_id = subaccount[\"id\"]\n```\n\n## 6. Add Exchange Credentials\n\nExchange credentials can also be added via UI under Settings -> Subaccounts,\nor programatically as shown below.\n\nFor best results, we recommend\n- Polymarket : create an account using email (not a wallet) and get your wallet and PK directly from Polymarket under [Settings -> Export Private Key](https://polymarket.com/settings)\n- Kalshi : create a secret/key pair with Read/Write access under [Settings -> Account & security -> API keys](https://kalshi.com/account/profile)\n\n```python\n# Add Polymarket credentials\nresponse = requests.post(\n    f\"{BASE_URL}/credentials\",\n    headers=headers,\n    json={\n        \"subaccount_id\": subaccount_id,\n        \"exchange\": \"polymarket\",\n        \"wallet_address\": \"your_polymarket_wallet_address\",\n        \"private_key\": \"your_polymarket_private_key\"\n    }\n)\n# Add Kalshi credentials\nresponse = requests.post(\n    f\"{BASE_URL}/credentials\",\n    headers=headers,\n    json={\n        \"subaccount_id\": subaccount_id,\n        \"exchange\": \"kalshi\",\n        \"api_key\": \"your_kalshi_api_key\",\n        \"api_secret\": \"your_kalshi_secret\"\n    }\n)\n```\n\nWe use asymmetric encryption so your credentials are not transferred between services or stored in plain text.\nWe delete your credentials when you delete a subaccount. \n\n## 7. Place Your First Order\n\nUse the River ID from your market search to place an order.\n\n```python\n# Place a limit order (buy 10 contracts at $0.50)\nresponse = requests.post(\n    f\"{BASE_URL}/orders\",\n    headers=headers,\n    json={\n        \"subaccount_id\": subaccount_id,\n        \"river_id\": 4552150,       # From market search\n        \"order_type\": \"LIMIT\",      # LIMIT or MARKET\n        \"time_in_force\": \"GTC\",     # FOK, GTC, GTD, or IOC\n        \"buy_flag\": True,           # True=buy, False=sell\n        \"price\": 0.50,              # Limit price (0-1)\n        \"qty\": 10,                  # Number of contracts\n    }\n)\norder = response.json()\nprint(f\"Order placed: {order['river_order_id']}\")\n```\n\n## 8. Check Order Status\n\nMonitor your order's progress by fetching its current state.\n\n```python\n# Get order status\norder_id = order['river_order_id']\nresponse = requests.get(\n    f\"{BASE_URL}/orders/{order_id}\",\n    headers=headers\n)\norder_status = response.json()\nprint(f\"Status: {order_status['status']}, Filled: {order_status['traded_qty']}/{order_status['qty']}\")\n```\n\nPossible order statuses:\n- `pending_submission` - Order received, awaiting processing\n- `resting` - Order live on the exchange (may include partially-filled live orders)\n- `filled` - Terminal: order fully executed\n- `partially_filled` - Terminal: order cancelled with some quantity filled\n- `cancelled` - Terminal: order cancelled with no fills\n- `rejected` - Order rejected (see `reject_reason`)\n\n## 9. Cancel an Order\n\nCancel a resting order before it's fully filled.\n\n```python\n# Cancel an order\norder_id = order['river_order_id']\nresponse = requests.delete(\n    f\"{BASE_URL}/orders/{order_id}\",\n    headers=headers\n)\nif response.status_code == 200:\n    print(\"Order cancelled successfully\")\n```\n\nNote: Only orders with status `pending_submission` or `resting` can be cancelled (`partially_filled` is terminal).\n\n## Supported Exchanges\n\n| Exchange | Markets | Status |\n|----------|---------|--------|\n| Kalshi | US regulated prediction markets | Available |\n| Polymarket | Crypto prediction markets | Available |\n| Polymarket US | US regulated prediction markets | Available |\n| Novig | US regulated prediction markets | Coming soon |\n| Rothera | US regulated prediction markets | Future integration |\n\n## Rate Limits\n\n- **Standard**: 10 requests/second\n- **Premium**: Contact support for higher limits\n\n\n\n## Authentication\n\nAll endpoints require authentication via one of:\n- **Bearer Token**: `Authorization: Bearer <jwt_token>` (for web clients)\n- **Signed Request** (programmatic access): three headers per REST request, or\n  three query params on the WebSocket handshake.\n\n> **Using the SDK?** `rivermarkets` (Python) \n> sign every REST request and WS handshake for you. You only need the raw\n> recipes below if you're integrating without an SDK.\n\n### REST signing\n\nSend three headers on every request:\n- `X-River-Key-Id`: UUID of your API key\n- `X-River-Timestamp`: current unix seconds (must be within 30s of server time)\n- `X-River-Signature`: base64 Ed25519 signature over the canonical request\n\nThe REST canonical string is LF-joined:\n```\nMETHOD\\nPATH\\nSORTED_QUERY\\nTIMESTAMP\\nSHA256(body) hex\n```\n\n```python\nimport base64, hashlib, time\nfrom urllib.parse import urlsplit, urlencode, parse_qsl, quote\nfrom nacl.signing import SigningKey\n\nsigning_key = SigningKey(base64.b64decode(PRIVATE_KEY_B64))\n\ndef sign(method: str, url: str, body: bytes = b\"\") -> dict:\n    parts = urlsplit(url)\n    # quote_via=quote encodes spaces as %20 to match RFC 3986 / the server.\n    sorted_q = urlencode(sorted(parse_qsl(parts.query, keep_blank_values=True)), quote_via=quote)\n    ts = str(int(time.time()))\n    canonical = \"\\n\".join([\n        method.upper(), parts.path, sorted_q, ts, hashlib.sha256(body).hexdigest(),\n    ]).encode()\n    sig = signing_key.sign(canonical).signature\n    return {\n        \"X-River-Key-Id\": KEY_ID,\n        \"X-River-Timestamp\": ts,\n        \"X-River-Signature\": base64.b64encode(sig).decode(),\n    }\n```\n\n### WebSocket signing\n\nBrowsers can't set custom headers on the WS upgrade, so the same three values\nmove to query params: `?key_id=&ts=&sig=`. The WS canonical string omits the\nbody hash and uses the literal `\"WS\"` as the method:\n```\nWS\\nPATH\\nSORTED_QUERY (excluding key_id/ts/sig)\\nTIMESTAMP\n```\n\n```python\nimport asyncio, base64, time\nfrom urllib.parse import urlencode, quote\nimport websockets\nfrom nacl.signing import SigningKey\n\nsigning_key = SigningKey(base64.b64decode(PRIVATE_KEY_B64))\n\n\ndef sign_ws(path: str, extra_params: dict | None = None) -> str:\n    \"\"\"Return a fully-formed wss:// URL with signing query params appended.\"\"\"\n    params = dict(extra_params or {})\n    sorted_q = urlencode(sorted(params.items()), quote_via=quote)\n    ts = str(int(time.time()))\n    canonical = \"\\n\".join([\"WS\", path, sorted_q, ts]).encode()\n    sig = base64.b64encode(signing_key.sign(canonical).signature).decode()\n    params.update({\"key_id\": KEY_ID, \"ts\": ts, \"sig\": sig})\n    return f\"wss://api.rivermarkets.com{path}?{urlencode(params)}\"\n\n\nasync def stream_orders(subaccount_id: str):\n    url = sign_ws(\"/v1/ws/orders\", {\"subaccount_id\": subaccount_id})\n    async with websockets.connect(url) as ws:\n        async for frame in ws:\n            print(frame)\n\n\nasyncio.run(stream_orders(\"411b3f8c-85f9-41c9-90b7-3ff6d74efc4f\"))\n```\n\n### Security notes\n\n- Your private key never traverses the wire. Generate a keypair at\n  `Settings → API Keys`; the private key is shown once.\n- Same signature cannot be submitted twice within 60 seconds (replay protection).\n  On network retries, re-sign with a fresh timestamp.\n- Timestamps must be within 30s of server time. Sync your clock via NTP.\n\n\n---\n\n\n\n# Order Types Documentation\n\nComplete guide to all order types available in the River Markets trading platform.\n\n---\n\n## Basic Order Types\n\n### Market Order\nExecutes immediately at the best available price.\n- **Use case**: When you need immediate execution and price is less important\n- **Example**: Market buy 100 contracts → fills at current best ask price\n\n### Limit Order\nRests on the order book at a specified price.\n- **Use case**: When you want price control and can wait for execution\n- **Example**: Limit buy 100 @ $0.65 → only fills at $0.65 or better\n\n---\n\n## Conditional Order Types\n\nConditional orders are **not placed immediately**. They activate (\"trigger\") when specific conditions are met.\n\n### 1. Stop Orders (STOP)\n\n**Stop orders trigger when price moves AGAINST your desired direction.** Used primarily for **stop losses** (exit protection) or **breakout entries**.\n\n#### Stop Market\n- **Triggers**: When market trades at or through your stop price\n- **Executes**: As a market order (immediate fill at best available price)\n- **Example**:\n  ```\n  You're LONG at $0.70, want to exit if price falls to $0.60\n  → Stop Market SELL @ $0.60\n  → Triggers when price ≤ $0.60\n  → Sends market sell order → fills immediately\n  ```\n\n#### Stop Limit\n- **Triggers**: When market trades at or through your stop price\n- **Executes**: As a limit order at your specified limit price\n- **Example**:\n  ```\n  You're LONG at $0.70, want to exit around $0.60 but not worse than $0.59\n  → Stop Limit SELL @ $0.60, Limit $0.59\n  → Triggers when price ≤ $0.60\n  → Sends limit sell order @ $0.59 → waits for fill at $0.59 or better\n  ```\n- **Risk**: May not fill if price moves too fast through your limit\n\n**Directional Logic:**\n- **BUY stop**: Triggers at or **above** stop price (breakout entry or short exit)\n- **SELL stop**: Triggers at or **below** stop price (stop loss or long exit)\n\n---\n\n### 2. Reverse Stop Orders (REVERSE_STOP)\n\n**Reverse stop orders trigger when price moves IN your desired direction.** Used exclusively for **take profit** scenarios.\n\n**Key Concept**: A \"reverse stop\" is called \"reverse\" because it triggers in the OPPOSITE direction of a normal stop order.\n\n#### Reverse Stop Market (TP Market)\n- **Triggers**: When market trades at or through your target price (OPPOSITE direction from normal stop)\n- **Executes**: As a market order\n- **Example**:\n  ```\n  You're LONG at $0.60, want to take profit if price rises to $0.80\n  → TP Market (Reverse Stop Market) SELL @ $0.80\n  → Normal stop would trigger BELOW, but reverse stop triggers ABOVE\n  → Triggers when price ≥ $0.80\n  → Sends market sell order → fills immediately\n  ```\n\n**Directional Logic (REVERSED from normal stop):**\n- **BUY reverse stop**: Triggers at or **below** target (opposite of normal buy stop)\n- **SELL reverse stop**: Triggers at or **above** target (opposite of normal sell stop)\n\n**Why \"reverse\"?**\n- Normal **SELL stop** @ $0.60 triggers when price ≤ $0.60 (price falling)\n- **SELL reverse stop** @ $0.80 triggers when price ≥ $0.80 (price rising)\n- The trigger direction is reversed!\n\n#### Reverse Stop Limit (TP Limit)\n- **Triggers**: When market trades at or through your target price\n- **Executes**: As a limit order at your specified limit price\n- **Example**:\n  ```\n  You're LONG at $0.60, want to take profit around $0.80 but not worse than $0.79\n  → TP Limit (Reverse Stop Limit) SELL @ $0.80, Limit $0.79\n  → Triggers when price ≥ $0.80\n  → Sends limit sell order @ $0.79 → waits for fill at $0.79 or better\n  ```\n\n---\n\n### 3. Take Profit Orders (TP)\n\n**Parent-child orders**: Automatically triggers a child order when a parent order **fills**.\n\n#### TP Market\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Immediately places the child order (can be another TP/SL or direct order)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH TP Market @ $0.80\n  → When buy fills → immediately activates TP Market SELL @ $0.80\n  → That TP Market is a reverse stop that triggers when price ≥ $0.80\n  ```\n\n#### TP Limit\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Activates TP Limit order (reverse stop limit)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH TP Limit @ $0.80 (limit $0.79)\n  → When buy fills → activates TP Limit SELL\n  → Triggers when price ≥ $0.80 → sends limit sell @ $0.79\n  ```\n\n---\n\n### 4. Stop Loss Orders (SL)\n\n**Parent-child orders**: Automatically triggers a child order when a parent order **fills**.\n\n#### SL Market\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Immediately places the child order (can be another SL/TP or direct order)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH SL Market @ $0.55\n  → When buy fills → immediately activates SL Market SELL @ $0.55\n  → That SL Market is a stop order that triggers when price ≤ $0.55\n  ```\n\n#### SL Limit\n- **Triggers**: When parent order is **fully filled**\n- **Executes**: Activates SL Limit order (stop limit)\n- **Example**:\n  ```\n  Place limit buy 100 @ $0.60 WITH SL Limit @ $0.55 (limit $0.54)\n  → When buy fills → activates SL Limit SELL\n  → Triggers when price ≤ $0.55 → sends limit sell @ $0.54\n  ```\n\n---\n\n## Order Type Comparison\n\n| Type | Trigger Condition | Execution | Primary Use Case |\n|------|------------------|-----------|------------------|\n| **Market** | None (immediate) | Immediate at best price | Need immediate fill |\n| **Limit** | None (rests) | At limit price or better | Want price control |\n| **Stop Market** | Price moves AGAINST you | Market order (immediate) | Stop loss, breakout entry |\n| **Stop Limit** | Price moves AGAINST you | Limit order (may not fill) | Stop loss with price protection |\n| **TP Market** | Parent fills + price moves FOR you | Market order via reverse stop | Take profit with immediate exit |\n| **TP Limit** | Parent fills + price moves FOR you | Limit order via reverse stop | Take profit with price control |\n| **SL Market** | Parent fills + price moves AGAINST you | Market order via stop | Stop loss from entry |\n| **SL Limit** | Parent fills + price moves AGAINST you | Limit order via stop | Stop loss with price floor |\n\n---\n\n## Key Concepts\n\n### Stop vs Reverse Stop\n- **Stop**: Triggers when price moves AGAINST you (exit losses, enter breakouts)\n- **Reverse Stop**: Triggers when price moves FOR you (take profits)\n\n### Parent-Child Orders\n- **TP/SL orders** are \"meta-orders\" that activate child orders when a parent fills\n- The child order itself is usually a stop or reverse stop order\n- This creates a two-step process: Parent fill → Child activation → Price trigger → Execution\n\n### Trigger Direction Summary\n| Order Side | Stop (Loss/Breakout) | Reverse Stop (Profit) |\n|------------|---------------------|----------------------|\n| **BUY** | Triggers ≥ stop price | Triggers ≤ target price |\n| **SELL** | Triggers ≤ stop price | Triggers ≥ target price |\n\n---\n\n## Examples\n\n### Complete Trading Scenario\n```\n1. Place limit BUY 100 @ $0.60\n   WITH TP Market @ $0.80 (reverse stop)\n   AND SL Market @ $0.55 (normal stop)\n\n2. Buy fills at $0.60\n   → TP Market SELL @ $0.80 activated (reverse stop)\n   → SL Market SELL @ $0.55 activated (normal stop)\n\n3a. If price rises to $0.80:\n    → TP triggers (price ≥ $0.80) → market sell executes\n    → SL cancelled automatically\n\n3b. If price falls to $0.55:\n    → SL triggers (price ≤ $0.55) → market sell executes\n    → TP cancelled automatically\n```\n\n### Breakout Entry with Protection\n```\nPrice is at $0.70, resistance at $0.75, support at $0.65\n\n1. Place Stop Market BUY @ $0.76 (breakout entry)\n   → Triggers when price ≥ $0.76 (breaks resistance)\n   → Market buy executes\n\n2. Add SL Market @ $0.74 to the stop order\n   → When breakout buy fills → SL activates\n   → Protects if breakout fails\n```\n\n\n\nContact Support:\n Name: River Markets",
+      "type": "text/plain"
+    }
+  }
+}
