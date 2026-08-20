@@ -43,6 +43,16 @@ tags:
 - Prediction Markets
 - Trading
 - Prime Brokerage
+- Financial-Services
+- Order Management
+- Market Data
+- WebSocket
+- Fintech
+tags_raw:
+- Company
+- Prediction Markets
+- Trading
+- Prime Brokerage
 - Financial Services
 - Order Management
 - Market Data
@@ -55,6 +65,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Balances
+  tags_raw:
   - balance
   properties:
   - type: OpenAPI
@@ -105,6 +117,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Fills
+  tags_raw:
   - fills
   properties:
   - type: OpenAPI
@@ -137,6 +151,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Markets
+  tags_raw:
   - markets
   properties:
   - type: OpenAPI
@@ -153,6 +169,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Order Books
+  tags_raw:
   - orderbooks
   properties:
   - type: OpenAPI
@@ -169,6 +187,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Order
+  tags_raw:
   - orders
   properties:
   - type: OpenAPI
@@ -185,6 +205,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Positions
+  tags_raw:
   - positions
   properties:
   - type: OpenAPI
@@ -201,6 +223,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Prices
+  tags_raw:
   - prices
   properties:
   - type: OpenAPI
@@ -218,6 +242,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Subaccounts
+  tags_raw:
   - subaccounts
   properties:
   - type: OpenAPI
@@ -251,6 +277,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Watchlist
+  tags_raw:
   - watchlists
   properties:
   - type: OpenAPI
