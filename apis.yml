@@ -307,6 +307,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/river-markets-capability-edges.yml
+  name: River Markets Business Capability Map
 - type: DeveloperPortal
   url: https://docs.rivermarkets.com
 - type: Documentation

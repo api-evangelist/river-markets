@@ -1,0 +1,58 @@
+slug: river-markets
+provider: River Markets
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: orders
+  spec_file: river-markets-orders-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.95
+  evidence: POST /v1/orders  Create Order; DELETE /v1/orders/{order_id}  Cancel Order; PATCH /v1/orders/{order_id}  Edit
+    Order; GET /v1/orders/{order_id}/queue-position
+  reason: Full order lifecycle — create, list, amend, cancel, cancel-all, queue position — routed across
+    multiple exchanges. This is unambiguously order capture, execution and routing, i.e. Trading Order
+    Management.
+- tag: complex-orders
+  spec_file: river-markets-complex-orders-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.9
+  evidence: POST /v1/complex-orders  Create Complex Order; schemas IcebergOrderParams, PegOrderParams,
+    SmartTakerOrderParams, ConditionalOrderCreate, CancelAllComplexOrdersRequest
+  reason: Operations create, list and cancel advanced order types (iceberg, peg, conditional, smart taker)
+    that are executed and routed across exchanges — order capture, execution and routing, i.e. Trading
+    Order Management. Algorithmic order params could argue for BC-1370.40, but the surface is order lifecycle
+    rather than strategy development.
+- tag: positions
+  spec_file: river-markets-positions-api-openapi.yml
+  capability_id: BC-1370.20
+  capability_id_l1: BC-1370
+  capability_name: Trading Position Management
+  confidence: 0.85
+  evidence: GET /v1/positions  Get Positions; schemas UserPositionListResponse, PositionResponse
+  reason: Returns the account's open contract positions across venues ('Track positions and fills across
+    exchanges with one ID'), which is trading position management. Only a single read endpoint, so slightly
+    short of top confidence.
+- tag: fills
+  spec_file: river-markets-fills-api-openapi.yml
+  capability_id: BC-1370.30
+  capability_id_l1: BC-1370
+  capability_name: Trading Order Management
+  confidence: 0.7
+  evidence: GET /v1/fills  Get Fills; schemas UserFillListResponse, FillResponse
+  reason: Returns execution fills for the account's orders across venues — execution reporting that belongs
+    to the order-management surface described in the vendor blurb ('single account, order-management system').
+    Could alternatively be read as trade capture/confirmation (BC-1380.10), hence not high confidence.
