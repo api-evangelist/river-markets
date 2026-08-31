@@ -129,7 +129,7 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Fills
+  - fills
   tags_raw:
   - fills
   properties:
@@ -181,7 +181,7 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Order Books
+  - orderbooks
   tags_raw:
   - orderbooks
   properties:
@@ -217,7 +217,7 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Positions
+  - positions
   tags_raw:
   - positions
   properties:
@@ -235,7 +235,7 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Prices
+  - prices
   tags_raw:
   - prices
   properties:
@@ -254,7 +254,7 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Subaccounts
+  - subaccounts
   tags_raw:
   - subaccounts
   properties:
@@ -289,7 +289,7 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Watchlist
+  - watchlists
   tags_raw:
   - watchlists
   properties:
