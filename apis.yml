@@ -1,15 +1,13 @@
 aid: river-markets
 name: River Markets
-description: >-
-  River Markets is a unified prime brokerage for prediction markets, consolidating multiple
-  exchanges — Kalshi, Polymarket, and Polymarket US (with Novig and Rothera planned) — behind a
-  single account, order-management system, and REST + WebSocket API. Every contract across all
-  venues is assigned a unified River ID, so professional and institutional traders can search
-  markets, place and route orders (including icebergs, pegs, stop-losses, and take-profits with
-  smart order routing), track positions and P&L across isolated subaccounts, and stream live
-  fills, orderbooks, orders, and trade prints from one integration. Requests are Ed25519-signed
-  so the private key never leaves the client process. Founded by ex-BlackRock and high-frequency
-  trading quants and backed by Y Combinator (Spring 2026).
+description: River Markets is a unified prime brokerage for prediction markets, consolidating multiple
+  exchanges — Kalshi, Polymarket, and Polymarket US (with Novig and Rothera planned) — behind a single
+  account, order-management system, and REST + WebSocket API. Every contract across all venues is assigned
+  a unified River ID, so professional and institutional traders can search markets, place and route orders
+  (including icebergs, pegs, stop-losses, and take-profits with smart order routing), track positions
+  and P&L across isolated subaccounts, and stream live fills, orderbooks, orders, and trade prints from
+  one integration. Requests are Ed25519-signed so the private key never leaves the client process. Founded
+  by ex-BlackRock and high-frequency trading quants and backed by Y Combinator (Spring 2026).
 url: https://raw.githubusercontent.com/api-evangelist/river-markets/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -44,7 +42,7 @@ accessModel:
   method: derived
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-09-16'
 x-enrichment:
   date: '2026-07-21'
   status: enriched
@@ -92,9 +90,8 @@ apis:
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-complex-orders-api
   name: River Markets complex-orders API
-  description: >-
-    Manage complex orders: conditional orders (take-profit and stop-loss), TWAP, and other advanced order
-    types.
+  description: 'Manage complex orders: conditional orders (take-profit and stop-loss), TWAP, and other
+    advanced order types.'
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
@@ -159,7 +156,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-markets-api
-  name: River Markets markets API
+  name: River Markets API
   description: Search and discover prediction markets across Kalshi and Polymarket.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -250,8 +247,7 @@ apis:
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-subaccounts-api
   name: River Markets subaccounts API
-  description: >-
-    Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.
+  description: Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
@@ -269,8 +265,7 @@ apis:
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-tradeprints-api
   name: River Markets tradeprints API
-  description: >-
-    Recent trades for a market. Pairs with the /v1/ws/tradeprints WebSocket for live updates.
+  description: Recent trades for a market. Pairs with the /v1/ws/tradeprints WebSocket for live updates.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
@@ -349,7 +344,10 @@ common:
   url: data-model/river-markets-data-model.yml
 - type: X-MCPServerCandidate
   url: mcp/river-markets-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
+    — a tool list derived from the published API contracts, not an existing server. The scorer already
+    read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
+    surfaces with a server that does not exist.'
 - type: Overlay
   url: overlays/river-markets-openapi-overlay.yaml
 - type: AgenticAccess
