@@ -90,8 +90,9 @@ apis:
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-complex-orders-api
   name: River Markets complex-orders API
-  description: 'Manage complex orders: conditional orders (take-profit and stop-loss), TWAP, and other
-    advanced order types.'
+  description: >-
+    Manage complex orders: conditional orders (take-profit and stop-loss), TWAP, and other advanced order
+    types.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
@@ -173,24 +174,6 @@ apis:
     url: https://docs.rivermarkets.com/api-reference/overview
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
-- aid: river-markets:river-markets-orderbooks-api
-  name: River Markets orderbooks API
-  description: The orderbooks API from River Markets — 2 operation(s) for orderbooks.
-  humanURL: https://docs.rivermarkets.com
-  baseURL: https://api.rivermarkets.com
-  tags:
-  - Order Books
-  tags_raw:
-  - orderbooks
-  properties:
-  - type: OpenAPI
-    url: openapi/river-markets-orderbooks-api-openapi.yml
-  - type: Documentation
-    url: https://docs.rivermarkets.com
-  - type: APIReference
-    url: https://docs.rivermarkets.com/api-reference/overview
-  - type: GettingStarted
-    url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-orders-api
   name: River Markets orders API
   description: Place and manage orders on prediction market exchanges.
@@ -247,7 +230,8 @@ apis:
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-subaccounts-api
   name: River Markets subaccounts API
-  description: Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.
+  description: >-
+    Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
@@ -265,7 +249,8 @@ apis:
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-tradeprints-api
   name: River Markets tradeprints API
-  description: Recent trades for a market. Pairs with the /v1/ws/tradeprints WebSocket for live updates.
+  description: >-
+    Recent trades for a market. Pairs with the /v1/ws/tradeprints WebSocket for live updates.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
@@ -291,6 +276,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/river-markets-watchlists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.rivermarkets.com
+  - type: APIReference
+    url: https://docs.rivermarkets.com/api-reference/overview
+  - type: GettingStarted
+    url: https://docs.rivermarkets.com/quickstart
+- aid: river-markets:river-markets-order-books-api
+  name: River Markets Order Books API
+  description: The Order Books API from River Markets — 2 operation(s) for order books.
+  humanURL: https://docs.rivermarkets.com
+  baseURL: https://api.rivermarkets.com
+  tags:
+  - Order Books
+  properties:
+  - type: OpenAPI
+    url: openapi/river-markets-order-books-api-openapi.yml
   - type: Documentation
     url: https://docs.rivermarkets.com
   - type: APIReference
