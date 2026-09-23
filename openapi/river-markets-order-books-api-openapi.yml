@@ -1,0 +1,258 @@
+openapi: 3.2.0
+info:
+  title: River Markets Orderbooks API
+  description: '# Getting Started
+
+
+    River Markets provides users with a unified prime brokerage interface for prediction markets, including
+
+    - Liquidity aggregation
+
+    - Order routing
+
+    - Market and data search
+
+
+    This API guide will help you get up and running quickly.'
+  contact:
+    name: River Markets
+    url: https://rivermarkets.com/
+  license:
+    name: Proprietary
+  version: 1.0.0
+servers:
+- url: https://api.rivermarkets.com
+security:
+- SignedRequestKeyId: []
+  SignedRequestTimestamp: []
+  SignedRequestSignature: []
+- BearerAuth: []
+tags:
+- name: Order Books
+paths:
+  /v1/orderbooks/generic-asset/{generic_asset_id}:
+    get:
+      tags:
+      - Order Books
+      summary: Get Generic Asset Orderbook
+      description: 'Get merged orderbook for a generic asset (basket).
+
+
+        Fetches orderbooks for all member instruments and merges them by summing
+
+        quantity at each price level. Touch mechanism ensures subscriptions are active.'
+      operationId: get_generic_asset_orderbook_v1_orderbooks_generic_asset__generic_asset_id__get
+      parameters:
+      - name: generic_asset_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Generic Asset Id
+      - name: levels
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 10
+          minimum: 1
+          description: Number of price levels to return
+          default: 10
+          title: Levels
+        description: Number of price levels to return
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderbookResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/orderbooks/{river_id}:
+    get:
+      tags:
+      - Order Books
+      summary: Get Orderbook
+      description: Get orderbook for a river_id.
+      operationId: get_orderbook_v1_orderbooks__river_id__get
+      parameters:
+      - name: river_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: River Id
+      - name: levels
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 10
+          minimum: 1
+          description: Number of price levels to return
+          default: 10
+          title: Levels
+        description: Number of price levels to return
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderbookResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    OrderbookStatus:
+      type: string
+      enum:
+      - ok
+      - pending
+      - not_found
+      title: OrderbookStatus
+    OrderbookData:
+      properties:
+        river_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: River Id
+        generic_asset_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Generic Asset Id
+        bids:
+          items:
+            $ref: '#/components/schemas/PriceLevelResponse'
+          type: array
+          title: Bids
+        asks:
+          items:
+            $ref: '#/components/schemas/PriceLevelResponse'
+          type: array
+          title: Asks
+        best_bid_price:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Best Bid Price
+        best_ask_price:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Best Ask Price
+        exchange_timestamp:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Exchange Timestamp
+          description: Exchange orderbook timestamp (UTC)
+      type: object
+      required:
+      - bids
+      - asks
+      title: OrderbookData
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    OrderbookResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/OrderbookStatus'
+        orderbook:
+          anyOf:
+          - $ref: '#/components/schemas/OrderbookData'
+          - type: 'null'
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - status
+      title: OrderbookResponse
+    PriceLevelResponse:
+      properties:
+        price:
+          type: number
+          title: Price
+        qty:
+          type: number
+          title: Qty
+        breakdown:
+          additionalProperties:
+            type: number
+          type: object
+          title: Breakdown
+      type: object
+      required:
+      - price
+      - qty
+      title: PriceLevelResponse
+  securitySchemes:
+    SignedRequestKeyId:
+      type: apiKey
+      in: header
+      name: X-River-Key-Id
+      description: UUID of your API key (from Settings → API Keys).
+    SignedRequestTimestamp:
+      type: apiKey
+      in: header
+      name: X-River-Timestamp
+      description: Current unix seconds. Must be within 30s of server time.
+    SignedRequestSignature:
+      type: apiKey
+      in: header
+      name: X-River-Signature
+      description: 'Base64 Ed25519 signature over the canonical request: METHOD\nPATH\nSORTED_QUERY\nTIMESTAMP\nSHA256(body) hex. See /api-reference/authentication for the full recipe.'
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: JWT bearer token for web client authentication.

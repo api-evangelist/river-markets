@@ -1,19 +1,7 @@
 {
   "provider": "river-markets",
   "sources": [
-    "river-markets-balance-api-openapi.yml",
-    "river-markets-complex-orders-api-openapi.yml",
-    "river-markets-fair-values-api-openapi.yml",
-    "river-markets-fills-api-openapi.yml",
-    "river-markets-generic-assets-api-openapi.yml",
-    "river-markets-markets-api-openapi.yml",
-    "river-markets-orderbooks-api-openapi.yml",
-    "river-markets-orders-api-openapi.yml",
-    "river-markets-positions-api-openapi.yml",
-    "river-markets-prices-api-openapi.yml",
-    "river-markets-subaccounts-api-openapi.yml",
-    "river-markets-tradeprints-api-openapi.yml",
-    "river-markets-watchlists-api-openapi.yml"
+    "_original/river-markets-openapi-original.json"
   ],
   "outputs": [
     "river-markets-balance-api-openapi.yml",
@@ -30,9 +18,35 @@
     "river-markets-tradeprints-api-openapi.yml",
     "river-markets-watchlists-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "river-markets-openapi-original.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "river-markets-openapi-original.json: declared missing tag: balance",
+    "river-markets-openapi-original.json: declared missing tag: fair-values",
+    "river-markets-openapi-original.json: declared missing tag: generic-assets",
+    "river-markets-openapi-original.json: declared missing tag: orderbooks",
+    "river-markets-openapi-original.json: declared missing tag: watchlists",
+    "superseded outputs removed: river-markets-order-books-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 13 total)"
+  ],
+  "skipped": [
+    "river-markets-balance-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-complex-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-fair-values-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-fills-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-generic-assets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-markets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-order-books-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-positions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-prices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-subaccounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-tradeprints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "river-markets-watchlists-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
