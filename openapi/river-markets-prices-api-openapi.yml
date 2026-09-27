@@ -205,92 +205,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    PricePoint:
-      properties:
-        timestamp:
-          type: integer
-          title: Timestamp
-        price:
-          type: number
-          title: Price
-      type: object
-      required:
-      - timestamp
-      - price
-      title: PricePoint
-      description: Simple price point for history type.
-    BatchVolumeResponse:
-      properties:
-        window:
-          type: string
-          enum:
-          - 15m
-          - 1h
-          - 24h
-          title: Window
-        volumes:
-          items:
-            $ref: '#/components/schemas/BatchVolumeEntry'
-          type: array
-          title: Volumes
-        as_of:
-          type: integer
-          title: As Of
-      type: object
-      required:
-      - window
-      - volumes
-      - as_of
-      title: BatchVolumeResponse
-      description: Windowed traded volume for a batch of markets (multibook grids).
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    BatchVolumeEntry:
-      properties:
-        river_id:
-          type: integer
-          title: River Id
-        volume:
-          type: number
-          title: Volume
-      type: object
-      required:
-      - river_id
-      - volume
-      title: BatchVolumeEntry
     PriceCandlestick:
       properties:
         timestamp:
@@ -322,6 +236,58 @@ components:
       - close
       title: PriceCandlestick
       description: Candlestick format for all exchanges.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    VolumeResponse:
+      properties:
+        river_id:
+          type: integer
+          title: River Id
+        window:
+          type: string
+          enum:
+          - 15m
+          - 1h
+          - 24h
+          title: Window
+        volume:
+          type: number
+          title: Volume
+        as_of:
+          type: integer
+          title: As Of
+      type: object
+      required:
+      - river_id
+      - window
+      - volume
+      - as_of
+      title: VolumeResponse
+      description: Traded volume over a recent window, summed from captured trade prints.
     PriceResponse:
       properties:
         river_id:
@@ -361,11 +327,8 @@ components:
       - type
       title: PriceResponse
       description: Response for price queries.
-    VolumeResponse:
+    BatchVolumeResponse:
       properties:
-        river_id:
-          type: integer
-          title: River Id
         window:
           type: string
           enum:
@@ -373,20 +336,57 @@ components:
           - 1h
           - 24h
           title: Window
-        volume:
-          type: number
-          title: Volume
+        volumes:
+          items:
+            $ref: '#/components/schemas/BatchVolumeEntry'
+          type: array
+          title: Volumes
         as_of:
           type: integer
           title: As Of
       type: object
       required:
-      - river_id
       - window
-      - volume
+      - volumes
       - as_of
-      title: VolumeResponse
-      description: Traded volume over a recent window, summed from captured trade prints.
+      title: BatchVolumeResponse
+      description: Windowed traded volume for a batch of markets (multibook grids).
+    PricePoint:
+      properties:
+        timestamp:
+          type: integer
+          title: Timestamp
+        price:
+          type: number
+          title: Price
+      type: object
+      required:
+      - timestamp
+      - price
+      title: PricePoint
+      description: Simple price point for history type.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    BatchVolumeEntry:
+      properties:
+        river_id:
+          type: integer
+          title: River Id
+        volume:
+          type: number
+          title: Volume
+      type: object
+      required:
+      - river_id
+      - volume
+      title: BatchVolumeEntry
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

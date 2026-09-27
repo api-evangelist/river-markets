@@ -274,59 +274,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    WatchlistMemberReorder:
-      properties:
-        river_ids:
-          items:
-            type: integer
-          type: array
-          minItems: 1
-          title: River Ids
-      type: object
-      required:
-      - river_ids
-      title: WatchlistMemberReorder
-      description: 'Request schema for reordering a watchlist.
-
-
-        The body is the full ordered list of ``river_id``s; the server rewrites
-
-        ``position`` to match. Sending the whole array avoids partial-reorder races
-
-        and keeps it to one round-trip.'
-    WatchlistUpdate:
-      properties:
-        name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-      type: object
-      title: WatchlistUpdate
-      description: Request schema for renaming / editing a watchlist.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    InstrumentStatus:
-      type: string
-      enum:
-      - active
-      - closed
-      - inactive
-      title: InstrumentStatus
-      description: "Instrument status derived in instruments table from exchange-specific fields.\n\nKalshi: maps from kalshi_markets.status\n    - 'active' -> ACTIVE\n    - everything else (closed, determined, finalized, settled, amended, inactive, initialized) -> CLOSED\n\nPolymarket: maps from polymarket_markets.closed and polymarket_markets.active booleans\n    - closed=true -> CLOSED\n    - active=true (and not closed) -> ACTIVE\n    - else (active=false, closed=false) -> INACTIVE"
     WatchlistDetailResponse:
       properties:
         watchlist_id:
@@ -400,78 +347,6 @@ components:
       - msg
       - type
       title: ValidationError
-    WatchlistCreate:
-      properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
-        name:
-          type: string
-          maxLength: 255
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        river_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: River Ids
-      type: object
-      required:
-      - subaccount_id
-      - name
-      title: WatchlistCreate
-      description: Request schema for creating a new watchlist.
-    WatchlistListResponse:
-      properties:
-        watchlists:
-          items:
-            $ref: '#/components/schemas/WatchlistResponse'
-          type: array
-          title: Watchlists
-      type: object
-      required:
-      - watchlists
-      title: WatchlistListResponse
-    WatchlistResponse:
-      properties:
-        watchlist_id:
-          type: string
-          title: Watchlist Id
-        name:
-          type: string
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-        owner_subaccount_id:
-          type: string
-          title: Owner Subaccount Id
-        river_ids:
-          items:
-            type: integer
-          type: array
-          title: River Ids
-        created_at:
-          type: string
-          title: Created At
-      type: object
-      required:
-      - watchlist_id
-      - name
-      - owner_subaccount_id
-      - river_ids
-      - created_at
-      title: WatchlistResponse
-      description: 'A watchlist summary (list view): metadata + ordered member river_ids.'
     MarketSearchResult:
       properties:
         river_id:
@@ -625,6 +500,37 @@ components:
       - status
       title: MarketSearchResult
       description: Schema for a single market search result.
+    WatchlistMemberReorder:
+      properties:
+        river_ids:
+          items:
+            type: integer
+          type: array
+          minItems: 1
+          title: River Ids
+      type: object
+      required:
+      - river_ids
+      title: WatchlistMemberReorder
+      description: 'Request schema for reordering a watchlist.
+
+
+        The body is the full ordered list of ``river_id``s; the server rewrites
+
+        ``position`` to match. Sending the whole array avoids partial-reorder races
+
+        and keeps it to one round-trip.'
+    WatchlistListResponse:
+      properties:
+        watchlists:
+          items:
+            $ref: '#/components/schemas/WatchlistResponse'
+          type: array
+          title: Watchlists
+      type: object
+      required:
+      - watchlists
+      title: WatchlistListResponse
     WatchlistMemberAdd:
       properties:
         river_ids:
@@ -638,6 +544,100 @@ components:
       - river_ids
       title: WatchlistMemberAdd
       description: Request schema for adding members to a watchlist (appended at the end).
+    WatchlistResponse:
+      properties:
+        watchlist_id:
+          type: string
+          title: Watchlist Id
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        owner_subaccount_id:
+          type: string
+          title: Owner Subaccount Id
+        river_ids:
+          items:
+            type: integer
+          type: array
+          title: River Ids
+        created_at:
+          type: string
+          title: Created At
+      type: object
+      required:
+      - watchlist_id
+      - name
+      - owner_subaccount_id
+      - river_ids
+      - created_at
+      title: WatchlistResponse
+      description: 'A watchlist summary (list view): metadata + ordered member river_ids.'
+    WatchlistCreate:
+      properties:
+        subaccount_id:
+          type: string
+          format: uuid
+          title: Subaccount Id
+        name:
+          type: string
+          maxLength: 255
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        river_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: River Ids
+      type: object
+      required:
+      - subaccount_id
+      - name
+      title: WatchlistCreate
+      description: Request schema for creating a new watchlist.
+    InstrumentStatus:
+      type: string
+      enum:
+      - active
+      - closed
+      - inactive
+      title: InstrumentStatus
+      description: "Instrument status derived in instruments table from exchange-specific fields.\n\nKalshi: maps from kalshi_markets.status\n    - 'active' -> ACTIVE\n    - everything else (closed, determined, finalized, settled, amended, inactive, initialized) -> CLOSED\n\nPolymarket: maps from polymarket_markets.closed and polymarket_markets.active booleans\n    - closed=true -> CLOSED\n    - active=true (and not closed) -> ACTIVE\n    - else (active=false, closed=false) -> INACTIVE"
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    WatchlistUpdate:
+      properties:
+        name:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+      type: object
+      title: WatchlistUpdate
+      description: Request schema for renaming / editing a watchlist.
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

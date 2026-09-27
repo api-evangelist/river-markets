@@ -129,38 +129,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    FairValueResponse:
-      properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
-        river_id:
-          type: integer
-          title: River Id
-        fair_value:
-          type: number
-          title: Fair Value
-        updated_at:
-          type: string
-          title: Updated At
-      type: object
-      required:
-      - subaccount_id
-      - river_id
-      - fair_value
-      - updated_at
-      title: FairValueResponse
-      description: A user-set fair value for one instrument on one subaccount.
     ValidationError:
       properties:
         loc:
@@ -220,6 +188,38 @@ components:
       required:
       - fair_values
       title: FairValueListResponse
+    FairValueResponse:
+      properties:
+        subaccount_id:
+          type: string
+          format: uuid
+          title: Subaccount Id
+        river_id:
+          type: integer
+          title: River Id
+        fair_value:
+          type: number
+          title: Fair Value
+        updated_at:
+          type: string
+          title: Updated At
+      type: object
+      required:
+      - subaccount_id
+      - river_id
+      - fair_value
+      - updated_at
+      title: FairValueResponse
+      description: A user-set fair value for one instrument on one subaccount.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

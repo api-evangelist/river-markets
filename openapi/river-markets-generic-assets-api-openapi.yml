@@ -256,95 +256,34 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    GenericAssetResponse:
+    GenericAssetCreate:
       properties:
-        generic_asset_id:
+        subaccount_id:
           type: string
-          title: Generic Asset Id
+          format: uuid
+          title: Subaccount Id
         name:
           type: string
+          maxLength: 255
           title: Name
         description:
           anyOf:
           - type: string
           - type: 'null'
           title: Description
-        category:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Category
-        subcategory:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Subcategory
-        resolves_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Resolves At
-        owner_subaccount_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Owner Subaccount Id
-        status:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Status
         river_ids:
-          items:
-            type: integer
-          type: array
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
           title: River Ids
-        inserted_at:
-          type: string
-          title: Inserted At
-          description: Creation timestamp (UTC)
       type: object
       required:
-      - generic_asset_id
+      - subaccount_id
       - name
-      - river_ids
-      - inserted_at
-      title: GenericAssetResponse
-      description: A tradeable generic asset (platform-curated or user-owned) with its member river_ids.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    GenericAssetUpdate:
-      properties:
-        name:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Name
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-      type: object
-      title: GenericAssetUpdate
-      description: Request schema for updating a user-owned generic asset.
-    InstrumentStatus:
-      type: string
-      enum:
-      - active
-      - closed
-      - inactive
-      title: InstrumentStatus
-      description: "Instrument status derived in instruments table from exchange-specific fields.\n\nKalshi: maps from kalshi_markets.status\n    - 'active' -> ACTIVE\n    - everything else (closed, determined, finalized, settled, amended, inactive, initialized) -> CLOSED\n\nPolymarket: maps from polymarket_markets.closed and polymarket_markets.active booleans\n    - closed=true -> CLOSED\n    - active=true (and not closed) -> ACTIVE\n    - else (active=false, closed=false) -> INACTIVE"
+      title: GenericAssetCreate
+      description: Request schema for creating a new user-owned generic asset (basket).
     GenericAssetDetailResponse:
       properties:
         generic_asset_id:
@@ -429,71 +368,22 @@ components:
       - msg
       - type
       title: ValidationError
-    GenericAssetMemberRemove:
+    GenericAssetUpdate:
       properties:
-        river_ids:
-          items:
-            type: integer
-          type: array
-          minItems: 1
-          title: River Ids
-      type: object
-      required:
-      - river_ids
-      title: GenericAssetMemberRemove
-      description: Request schema for removing members from a user-owned generic asset.
-    GenericAssetListResponse:
-      properties:
-        assets:
-          items:
-            $ref: '#/components/schemas/GenericAssetResponse'
-          type: array
-          title: Assets
-      type: object
-      required:
-      - assets
-      title: GenericAssetListResponse
-    GenericAssetMemberAdd:
-      properties:
-        river_ids:
-          items:
-            type: integer
-          type: array
-          minItems: 1
-          title: River Ids
-      type: object
-      required:
-      - river_ids
-      title: GenericAssetMemberAdd
-      description: Request schema for adding members to a user-owned generic asset.
-    GenericAssetCreate:
-      properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
         name:
-          type: string
-          maxLength: 255
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
           title: Name
         description:
           anyOf:
           - type: string
           - type: 'null'
           title: Description
-        river_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: River Ids
       type: object
-      required:
-      - subaccount_id
-      - name
-      title: GenericAssetCreate
-      description: Request schema for creating a new user-owned generic asset (basket).
+      title: GenericAssetUpdate
+      description: Request schema for updating a user-owned generic asset.
     MarketSearchResult:
       properties:
         river_id:
@@ -647,6 +537,116 @@ components:
       - status
       title: MarketSearchResult
       description: Schema for a single market search result.
+    GenericAssetMemberRemove:
+      properties:
+        river_ids:
+          items:
+            type: integer
+          type: array
+          minItems: 1
+          title: River Ids
+      type: object
+      required:
+      - river_ids
+      title: GenericAssetMemberRemove
+      description: Request schema for removing members from a user-owned generic asset.
+    GenericAssetMemberAdd:
+      properties:
+        river_ids:
+          items:
+            type: integer
+          type: array
+          minItems: 1
+          title: River Ids
+      type: object
+      required:
+      - river_ids
+      title: GenericAssetMemberAdd
+      description: Request schema for adding members to a user-owned generic asset.
+    GenericAssetListResponse:
+      properties:
+        assets:
+          items:
+            $ref: '#/components/schemas/GenericAssetResponse'
+          type: array
+          title: Assets
+      type: object
+      required:
+      - assets
+      title: GenericAssetListResponse
+    InstrumentStatus:
+      type: string
+      enum:
+      - active
+      - closed
+      - inactive
+      title: InstrumentStatus
+      description: "Instrument status derived in instruments table from exchange-specific fields.\n\nKalshi: maps from kalshi_markets.status\n    - 'active' -> ACTIVE\n    - everything else (closed, determined, finalized, settled, amended, inactive, initialized) -> CLOSED\n\nPolymarket: maps from polymarket_markets.closed and polymarket_markets.active booleans\n    - closed=true -> CLOSED\n    - active=true (and not closed) -> ACTIVE\n    - else (active=false, closed=false) -> INACTIVE"
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GenericAssetResponse:
+      properties:
+        generic_asset_id:
+          type: string
+          title: Generic Asset Id
+        name:
+          type: string
+          title: Name
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        category:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Category
+        subcategory:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Subcategory
+        resolves_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Resolves At
+        owner_subaccount_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Owner Subaccount Id
+        status:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Status
+        river_ids:
+          items:
+            type: integer
+          type: array
+          title: River Ids
+        inserted_at:
+          type: string
+          title: Inserted At
+          description: Creation timestamp (UTC)
+      type: object
+      required:
+      - generic_asset_id
+      - name
+      - river_ids
+      - inserted_at
+      title: GenericAssetResponse
+      description: A tradeable generic asset (platform-curated or user-owned) with its member river_ids.
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

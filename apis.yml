@@ -54,11 +54,12 @@ tags:
 - Prediction Markets
 - Trading
 - Prime Brokerage
-- Financial-Services
+- Financial Services
 - Order Management
 - Market Data
 - WebSocket
 - Fintech
+- Real-Time
 tags_raw:
 - Company
 - Prediction Markets
@@ -69,9 +70,11 @@ tags_raw:
 - Market Data
 - WebSocket
 - Fintech
+- Financial-Services
+- Real-Time
 apis:
 - aid: river-markets:river-markets-balance-api
-  name: River Markets balance API
+  name: River Markets Balance API
   description: The balance API from River Markets — 1 operation(s) for balance.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -89,7 +92,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-complex-orders-api
-  name: River Markets complex-orders API
+  name: River Markets Complex Orders API
   description: >-
     Manage complex orders: conditional orders (take-profit and stop-loss), TWAP, and other advanced order
     types.
@@ -107,7 +110,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-fair-values-api
-  name: River Markets fair-values API
+  name: River Markets Fair Values API
   description: The fair-values API from River Markets — 2 operation(s) for fair-values.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -123,7 +126,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-fills-api
-  name: River Markets fills API
+  name: River Markets Fills API
   description: Retrieve trade execution history and fill details.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -141,7 +144,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-generic-assets-api
-  name: River Markets generic-assets API
+  name: River Markets Generic Assets API
   description: The generic-assets API from River Markets — 3 operation(s) for generic-assets.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -175,7 +178,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-orders-api
-  name: River Markets orders API
+  name: River Markets Orders API
   description: Place and manage orders on prediction market exchanges.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -193,7 +196,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-positions-api
-  name: River Markets positions API
+  name: River Markets Positions API
   description: View current portfolio positions across all connected exchanges.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -211,7 +214,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-prices-api
-  name: River Markets prices API
+  name: River Markets Prices API
   description: Get historical price data and candlesticks from exchanges.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -229,7 +232,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-subaccounts-api
-  name: River Markets subaccounts API
+  name: River Markets Subaccounts API
   description: >-
     Manage trading subaccounts. Each subaccount can have its own exchange credentials and positions.
   humanURL: https://docs.rivermarkets.com
@@ -248,7 +251,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-tradeprints-api
-  name: River Markets tradeprints API
+  name: River Markets Tradeprints API
   description: >-
     Recent trades for a market. Pairs with the /v1/ws/tradeprints WebSocket for live updates.
   humanURL: https://docs.rivermarkets.com
@@ -265,7 +268,7 @@ apis:
   - type: GettingStarted
     url: https://docs.rivermarkets.com/quickstart
 - aid: river-markets:river-markets-watchlists-api
-  name: River Markets watchlists API
+  name: River Markets Watchlists API
   description: The watchlists API from River Markets — 4 operation(s) for watchlists.
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
@@ -288,8 +291,6 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
-  - Order Book
-  tags_raw:
   - Order Books
   properties:
   - type: OpenAPI

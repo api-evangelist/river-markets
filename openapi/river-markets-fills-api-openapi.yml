@@ -108,41 +108,24 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
+    UserFillListResponse:
       properties:
-        loc:
+        subaccount_to_fills:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            additionalProperties:
+              anyOf:
+              - type: string
+              - items:
+                  $ref: '#/components/schemas/FillResponse'
+                type: array
+            type: object
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Subaccount To Fills
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - subaccount_to_fills
+      title: UserFillListResponse
+      description: Schema for list of fills for a user.
     FillResponse:
       properties:
         river_id:
@@ -201,24 +184,41 @@ components:
       - is_maker
       title: FillResponse
       description: Schema for fill response.
-    UserFillListResponse:
+    HTTPValidationError:
       properties:
-        subaccount_to_fills:
+        detail:
           items:
-            additionalProperties:
-              anyOf:
-              - type: string
-              - items:
-                  $ref: '#/components/schemas/FillResponse'
-                type: array
-            type: object
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Subaccount To Fills
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - subaccount_to_fills
-      title: UserFillListResponse
-      description: Schema for list of fills for a user.
+      - loc
+      - msg
+      - type
+      title: ValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

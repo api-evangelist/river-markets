@@ -62,6 +62,39 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ExchangeBalance:
+      properties:
+        exchange_id:
+          type: integer
+          title: Exchange Id
+        exchange_name:
+          type: string
+          title: Exchange Name
+        balance:
+          anyOf:
+          - type: string
+            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
+          - type: 'null'
+          title: Balance
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - exchange_id
+      - exchange_name
+      title: ExchangeBalance
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -88,30 +121,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ExchangeBalance:
-      properties:
-        exchange_id:
-          type: integer
-          title: Exchange Id
-        exchange_name:
-          type: string
-          title: Exchange Name
-        balance:
-          anyOf:
-          - type: string
-            pattern: ^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$
-          - type: 'null'
-          title: Balance
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-      type: object
-      required:
-      - exchange_id
-      - exchange_name
-      title: ExchangeBalance
     ExchangeBalanceResponse:
       properties:
         subaccount_id:
@@ -128,15 +137,6 @@ components:
       - subaccount_id
       - balances
       title: ExchangeBalanceResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey
