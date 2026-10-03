@@ -109,15 +109,6 @@ components:
       - subaccount_to_positions
       title: UserPositionListResponse
       description: Positions grouped by subaccount.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     PositionResponse:
       properties:
         river_id:
@@ -200,6 +191,15 @@ components:
       - msg
       - type
       title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

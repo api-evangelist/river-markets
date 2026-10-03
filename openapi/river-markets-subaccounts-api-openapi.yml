@@ -167,55 +167,11 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    AccountType:
-      type: string
-      enum:
-      - custodial
-      - non_custodial
-      title: AccountType
-      description: Type of trading subaccount.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    SubaccountUpdate:
+    SubaccountCreate:
       properties:
         name:
-          anyOf:
-          - type: string
-            maxLength: 100
-          - type: 'null'
+          type: string
+          maxLength: 100
           title: Name
         description:
           anyOf:
@@ -223,9 +179,21 @@ components:
             maxLength: 500
           - type: 'null'
           title: Description
+        account_type:
+          $ref: '#/components/schemas/AccountType'
+          default: non_custodial
       type: object
-      title: SubaccountUpdate
-      description: Schema for updating a subaccount.
+      required:
+      - name
+      title: SubaccountCreate
+      description: Schema for creating a new subaccount.
+    AccountType:
+      type: string
+      enum:
+      - custodial
+      - non_custodial
+      title: AccountType
+      description: Type of trading subaccount.
     SubaccountResponse:
       properties:
         subaccount_id:
@@ -257,11 +225,13 @@ components:
       - inserted_at
       title: SubaccountResponse
       description: Schema for subaccount response.
-    SubaccountCreate:
+    SubaccountUpdate:
       properties:
         name:
-          type: string
-          maxLength: 100
+          anyOf:
+          - type: string
+            maxLength: 100
+          - type: 'null'
           title: Name
         description:
           anyOf:
@@ -269,14 +239,44 @@ components:
             maxLength: 500
           - type: 'null'
           title: Description
-        account_type:
-          $ref: '#/components/schemas/AccountType'
-          default: non_custodial
+      type: object
+      title: SubaccountUpdate
+      description: Schema for updating a subaccount.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
       type: object
       required:
-      - name
-      title: SubaccountCreate
-      description: Schema for creating a new subaccount.
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

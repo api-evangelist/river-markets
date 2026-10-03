@@ -86,15 +86,22 @@ components:
       - exchange_id
       - exchange_name
       title: ExchangeBalance
-    HTTPValidationError:
+    ExchangeBalanceResponse:
       properties:
-        detail:
+        subaccount_id:
+          type: string
+          format: uuid
+          title: Subaccount Id
+        balances:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/ExchangeBalance'
           type: array
-          title: Detail
+          title: Balances
       type: object
-      title: HTTPValidationError
+      required:
+      - subaccount_id
+      - balances
+      title: ExchangeBalanceResponse
     ValidationError:
       properties:
         loc:
@@ -121,22 +128,15 @@ components:
       - msg
       - type
       title: ValidationError
-    ExchangeBalanceResponse:
+    HTTPValidationError:
       properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
-        balances:
+        detail:
           items:
-            $ref: '#/components/schemas/ExchangeBalance'
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Balances
+          title: Detail
       type: object
-      required:
-      - subaccount_id
-      - balances
-      title: ExchangeBalanceResponse
+      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

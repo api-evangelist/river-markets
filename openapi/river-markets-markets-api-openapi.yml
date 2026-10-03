@@ -402,57 +402,35 @@ components:
         echoed back in ``unmatched_tickers`` / ``unmatched_slugs`` so callers can tell the
 
         difference between "not found" and a lookup they forgot to send.'
-    MarketSearchResponse:
+    MarketMatchBatchRequest:
       properties:
-        query:
-          type: string
-          title: Query
+        tickers:
+          items:
+            type: string
+          type: array
+          title: Tickers
+          description: Exact Kalshi tickers to resolve (e.g. KXNBA-26-DET).
+        slugs:
+          items:
+            type: string
+          type: array
+          title: Slugs
+          description: Exact Polymarket / Polymarket-US slugs to resolve (e.g. will-the-denver-nuggets-win-the-2026-nba-finals).
+      type: object
+      title: MarketMatchBatchRequest
+      description: 'Batch exact-match request: resolve many Kalshi tickers / Polymarket slugs at once.'
+    MarketLookupResponse:
+      properties:
         results:
           items:
             $ref: '#/components/schemas/MarketSearchResult'
           type: array
           title: Results
-        total:
-          type: integer
-          title: Total
-        total_events:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Total Events
       type: object
       required:
-      - query
       - results
-      - total
-      title: MarketSearchResponse
-      description: Schema for market search response.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      title: MarketLookupResponse
+      description: Schema for batch market lookup response.
     MarketSearchResult:
       properties:
         river_id:
@@ -606,18 +584,57 @@ components:
       - status
       title: MarketSearchResult
       description: Schema for a single market search result.
-    MarketLookupResponse:
+    ValidationError:
       properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    MarketSearchResponse:
+      properties:
+        query:
+          type: string
+          title: Query
         results:
           items:
             $ref: '#/components/schemas/MarketSearchResult'
           type: array
           title: Results
+        total:
+          type: integer
+          title: Total
+        total_events:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Total Events
       type: object
       required:
+      - query
       - results
-      title: MarketLookupResponse
-      description: Schema for batch market lookup response.
+      - total
+      title: MarketSearchResponse
+      description: Schema for market search response.
     InstrumentStatus:
       type: string
       enum:
@@ -635,23 +652,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    MarketMatchBatchRequest:
-      properties:
-        tickers:
-          items:
-            type: string
-          type: array
-          title: Tickers
-          description: Exact Kalshi tickers to resolve (e.g. KXNBA-26-DET).
-        slugs:
-          items:
-            type: string
-          type: array
-          title: Slugs
-          description: Exact Polymarket / Polymarket-US slugs to resolve (e.g. will-the-denver-nuggets-win-the-2026-nba-finals).
-      type: object
-      title: MarketMatchBatchRequest
-      description: 'Batch exact-match request: resolve many Kalshi tickers / Polymarket slugs at once.'
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

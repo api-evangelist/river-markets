@@ -129,6 +129,40 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    FairValueListResponse:
+      properties:
+        fair_values:
+          items:
+            $ref: '#/components/schemas/FairValueResponse'
+          type: array
+          title: Fair Values
+      type: object
+      required:
+      - fair_values
+      title: FairValueListResponse
+    FairValueResponse:
+      properties:
+        subaccount_id:
+          type: string
+          format: uuid
+          title: Subaccount Id
+        river_id:
+          type: integer
+          title: River Id
+        fair_value:
+          type: number
+          title: Fair Value
+        updated_at:
+          type: string
+          title: Updated At
+      type: object
+      required:
+      - subaccount_id
+      - river_id
+      - fair_value
+      - updated_at
+      title: FairValueResponse
+      description: A user-set fair value for one instrument on one subaccount.
     ValidationError:
       properties:
         loc:
@@ -177,40 +211,6 @@ components:
       - fair_value
       title: FairValueUpsert
       description: Request schema for setting a fair value (insert-or-overwrite).
-    FairValueListResponse:
-      properties:
-        fair_values:
-          items:
-            $ref: '#/components/schemas/FairValueResponse'
-          type: array
-          title: Fair Values
-      type: object
-      required:
-      - fair_values
-      title: FairValueListResponse
-    FairValueResponse:
-      properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
-        river_id:
-          type: integer
-          title: River Id
-        fair_value:
-          type: number
-          title: Fair Value
-        updated_at:
-          type: string
-          title: Updated At
-      type: object
-      required:
-      - subaccount_id
-      - river_id
-      - fair_value
-      - updated_at
-      title: FairValueResponse
-      description: A user-set fair value for one instrument on one subaccount.
     HTTPValidationError:
       properties:
         detail:

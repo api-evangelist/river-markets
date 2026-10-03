@@ -102,6 +102,13 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    TradeprintsStatus:
+      type: string
+      enum:
+      - ok
+      - pending
+      - not_found
+      title: TradeprintsStatus
     ValidationError:
       properties:
         loc:
@@ -145,30 +152,6 @@ components:
         are surfaced per-row (status `not_found`) with a `message` — a bad river_id
 
         or upstream error never aborts the whole call.'
-    TradeprintsResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/TradeprintsStatus'
-        river_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: River Id
-        trades:
-          items:
-            $ref: '#/components/schemas/TradeprintEvent'
-          type: array
-          title: Trades
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-      type: object
-      required:
-      - status
-      title: TradeprintsResponse
-      description: Per-market block of recent trades from the exchange.
     TradeprintEvent:
       properties:
         exchange_timestamp:
@@ -208,6 +191,30 @@ components:
         i.e. the trade hit an ask. The frontend renders side color and "Buy/Sell"
 
         from this flag.'
+    TradeprintsResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/TradeprintsStatus'
+        river_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: River Id
+        trades:
+          items:
+            $ref: '#/components/schemas/TradeprintEvent'
+          type: array
+          title: Trades
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - status
+      title: TradeprintsResponse
+      description: Per-market block of recent trades from the exchange.
     HTTPValidationError:
       properties:
         detail:
@@ -217,13 +224,6 @@ components:
           title: Detail
       type: object
       title: HTTPValidationError
-    TradeprintsStatus:
-      type: string
-      enum:
-      - ok
-      - pending
-      - not_found
-      title: TradeprintsStatus
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey
