@@ -102,6 +102,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     TradeprintsStatus:
       type: string
       enum:
@@ -109,6 +118,47 @@ components:
       - pending
       - not_found
       title: TradeprintsStatus
+    TradeprintsBulkResponse:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/TradeprintsResponse'
+          type: array
+          title: Results
+      type: object
+      title: TradeprintsBulkResponse
+      description: 'Response for `GET /v1/tradeprints?river_ids=...`.
+
+
+        `results` preserves the order of the requested `river_ids`. Partial failures
+
+        are surfaced per-row (status `not_found`) with a `message` — a bad river_id
+
+        or upstream error never aborts the whole call.'
+    TradeprintsResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/TradeprintsStatus'
+        river_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: River Id
+        trades:
+          items:
+            $ref: '#/components/schemas/TradeprintEvent'
+          type: array
+          title: Trades
+        message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message
+      type: object
+      required:
+      - status
+      title: TradeprintsResponse
+      description: Per-market block of recent trades from the exchange.
     ValidationError:
       properties:
         loc:
@@ -135,23 +185,6 @@ components:
       - msg
       - type
       title: ValidationError
-    TradeprintsBulkResponse:
-      properties:
-        results:
-          items:
-            $ref: '#/components/schemas/TradeprintsResponse'
-          type: array
-          title: Results
-      type: object
-      title: TradeprintsBulkResponse
-      description: 'Response for `GET /v1/tradeprints?river_ids=...`.
-
-
-        `results` preserves the order of the requested `river_ids`. Partial failures
-
-        are surfaced per-row (status `not_found`) with a `message` — a bad river_id
-
-        or upstream error never aborts the whole call.'
     TradeprintEvent:
       properties:
         exchange_timestamp:
@@ -191,39 +224,6 @@ components:
         i.e. the trade hit an ask. The frontend renders side color and "Buy/Sell"
 
         from this flag.'
-    TradeprintsResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/TradeprintsStatus'
-        river_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: River Id
-        trades:
-          items:
-            $ref: '#/components/schemas/TradeprintEvent'
-          type: array
-          title: Trades
-        message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message
-      type: object
-      required:
-      - status
-      title: TradeprintsResponse
-      description: Per-market block of recent trades from the exchange.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

@@ -436,33 +436,28 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    OrderListResponse:
+    OrderCreateResponse:
       properties:
-        orders:
-          items:
-            $ref: '#/components/schemas/OrderResponse'
-          type: array
-          title: Orders
-          description: List of orders matching the query
-        count:
-          type: integer
-          title: Count
-          description: Total count of matching orders (for pagination)
+        river_order_id:
+          type: string
+          format: uuid
+          title: River Order Id
+          description: Unique order identifier
+        complex_orders:
+          additionalProperties:
+            items:
+              type: string
+              format: uuid
+            type: array
+          type: object
+          title: Complex Orders
+          description: List of complex river orders id
       type: object
       required:
-      - orders
-      - count
-      title: OrderListResponse
-      description: Schema for list of orders.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - river_order_id
+      - complex_orders
+      title: OrderCreateResponse
+      description: Schema for order create response.
     OrderResponse:
       properties:
         river_order_id:
@@ -604,201 +599,15 @@ components:
       - complex_order_ids
       title: OrderResponse
       description: Schema for order response, when user request information about an order.
-    OrderEditResponse:
+    HTTPValidationError:
       properties:
-        river_order_id:
-          type: string
-          format: uuid
-          title: River Order Id
-          description: Unique order identifier
-        status:
-          type: string
-          title: Status
-          description: Always PENDING_AMEND. Final status (RESTING on success, REJECTED on failure) is delivered via the orders WS.
-      type: object
-      required:
-      - river_order_id
-      - status
-      title: OrderEditResponse
-      description: Schema for order edit response.
-    OrderEditRequest:
-      properties:
-        qty:
-          anyOf:
-          - type: number
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Qty
-          description: New total order quantity
-        price:
-          anyOf:
-          - type: number
-            exclusiveMaximum: 1.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Price
-          description: New limit price (between 0 and 1)
-      type: object
-      title: OrderEditRequest
-      description: 'Schema for editing (amending) an existing simple limit order.
-
-
-        `qty` is the TOTAL order quantity (not remaining) — matches Kalshi''s amend semantics.
-
-        At least one of `qty` or `price` must be provided.'
-    CancelAllRequest:
-      properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
-        river_ids:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: River Ids
-          description: If set, only cancel open orders for these instruments; otherwise cancel all open orders on the subaccount. Must be either omitted/null or a non-empty list.
-      type: object
-      required:
-      - subaccount_id
-      title: CancelAllRequest
-      description: Request body for cancelling all orders for a subaccount.
-    ConditionalOrderCreate:
-      properties:
-        conditional_order_type:
-          type: string
-          enum:
-          - TP
-          - SL
-          - STOP
-          - REVERSE_STOP
-          description: 'Type of conditional order: TP (take profit), SL (stop loss), or STOP'
-        stop_order_price:
-          anyOf:
-          - type: number
-            exclusiveMaximum: 1.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Stop Order Price
-          description: Activation price for STOP conditional orders. This is the price at which the conditional order triggers and places the trigger_order.
-        trigger_order:
-          $ref: '#/components/schemas/TriggerOrder'
-          description: The order that gets placed when the conditional order activates. For TP/SL this happens after the parent order fills; for STOP this happens when stop_order_price is reached.
-        parent_river_order_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Parent River Order Id
-          description: Parent order ID (required for TP and SL)
-        parent_complex_order_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Parent Complex Order Id
-          description: Parent complex order ID (for chaining)
-      type: object
-      required:
-      - conditional_order_type
-      - trigger_order
-      title: ConditionalOrderCreate
-      description: Schema for a conditional order (take profit or stop loss) attached to a parent order.
-    ValidationError:
-      properties:
-        loc:
+        detail:
           items:
-            anyOf:
-            - type: string
-            - type: integer
+            $ref: '#/components/schemas/ValidationError'
           type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
+          title: Detail
       type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    OrderCreateResponse:
-      properties:
-        river_order_id:
-          type: string
-          format: uuid
-          title: River Order Id
-          description: Unique order identifier
-        complex_orders:
-          additionalProperties:
-            items:
-              type: string
-              format: uuid
-            type: array
-          type: object
-          title: Complex Orders
-          description: List of complex river orders id
-      type: object
-      required:
-      - river_order_id
-      - complex_orders
-      title: OrderCreateResponse
-      description: Schema for order create response.
-    OrderQueuePositionResponse:
-      properties:
-        river_order_id:
-          type: string
-          format: uuid
-          title: River Order Id
-          description: River order identifier
-        exchange_order_id:
-          type: string
-          title: Exchange Order Id
-          description: Exchange order ID with the best (minimum) queue priority
-        queue_position:
-          type: number
-          title: Queue Position
-          description: Number of preceding shares in the queue ahead of this order (lower is better priority)
-      type: object
-      required:
-      - river_order_id
-      - exchange_order_id
-      - queue_position
-      title: OrderQueuePositionResponse
-      description: Schema for the queue-position response of an order.
-    CancelOrderResponse:
-      properties:
-        cancelled_river_order_ids:
-          items:
-            type: string
-            format: uuid
-          type: array
-          title: Cancelled River Order Ids
-          description: List of cancelled river order identifiers
-        failed_cancelled_reasons:
-          additionalProperties:
-            type: string
-          propertyNames:
-            format: uuid
-          type: object
-          title: Failed Cancelled Reasons
-          description: Dictionary of failed to cancel river order identifiers and reasons
-      type: object
-      required:
-      - cancelled_river_order_ids
-      - failed_cancelled_reasons
-      title: CancelOrderResponse
-      description: Schema for cancel order response
+      title: HTTPValidationError
     OrderDetailResponse:
       properties:
         river_order_id:
@@ -947,20 +756,15 @@ components:
       - complex_order_ids
       title: OrderDetailResponse
       description: Schema for order detail response including fills.
-    TriggerOrder:
+    OrderEditRequest:
       properties:
-        order_type:
-          type: string
-          enum:
-          - LIMIT
-          - MARKET
-          - RFQ_TAKER
-          description: 'Order type for the triggered order: ''LIMIT'' or ''MARKET'''
         qty:
-          type: number
-          exclusiveMinimum: 0.0
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: 'null'
           title: Qty
-          description: Quantity (number of contracts) for the triggered order
+          description: New total order quantity
         price:
           anyOf:
           - type: number
@@ -968,31 +772,73 @@ components:
             exclusiveMinimum: 0.0
           - type: 'null'
           title: Price
-          description: Limit price for the triggered order (between 0 and 1). Required when order_type is LIMIT.
-        buy_flag:
-          type: boolean
-          title: Buy Flag
-          description: 'Direction of the triggered order: true=buy, false=sell'
-        stop_order_price:
-          anyOf:
-          - type: number
-            exclusiveMaximum: 1.0
-            exclusiveMinimum: 0.0
-          - type: 'null'
-          title: Stop Order Price
-          description: 'Price at which the triggered order activates as a stop or reverse stop. Required for SL (stop trigger) and TP MARKET (reverse stop trigger). For SL: triggers when price moves against you. For TP MARKET: triggers when price moves in your favor.'
+          description: New limit price (between 0 and 1)
+      type: object
+      title: OrderEditRequest
+      description: 'Schema for editing (amending) an existing simple limit order.
+
+
+        `qty` is the TOTAL order quantity (not remaining) — matches Kalshi''s amend semantics.
+
+        At least one of `qty` or `price` must be provided.'
+    CancelOrderResponse:
+      properties:
+        cancelled_river_order_ids:
+          items:
+            type: string
+            format: uuid
+          type: array
+          title: Cancelled River Order Ids
+          description: List of cancelled river order identifiers
+        failed_cancelled_reasons:
+          additionalProperties:
+            type: string
+          propertyNames:
+            format: uuid
+          type: object
+          title: Failed Cancelled Reasons
+          description: Dictionary of failed to cancel river order identifiers and reasons
       type: object
       required:
-      - order_type
-      - qty
-      - buy_flag
-      title: TriggerOrder
-      description: 'The order that will be sent to the exchange when the conditional order''s condition is met.
-
-
-        For TP/SL: the parent order fills → the conditional activates → this trigger order is placed.
-
-        For STOP/REVERSE_STOP: the stop_order_price is reached → this trigger order is placed.'
+      - cancelled_river_order_ids
+      - failed_cancelled_reasons
+      title: CancelOrderResponse
+      description: Schema for cancel order response
+    OrderListResponse:
+      properties:
+        orders:
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+          type: array
+          title: Orders
+          description: List of orders matching the query
+        count:
+          type: integer
+          title: Count
+          description: Total count of matching orders (for pagination)
+      type: object
+      required:
+      - orders
+      - count
+      title: OrderListResponse
+      description: Schema for list of orders.
+    OrderEditResponse:
+      properties:
+        river_order_id:
+          type: string
+          format: uuid
+          title: River Order Id
+          description: Unique order identifier
+        status:
+          type: string
+          title: Status
+          description: Always PENDING_AMEND. Final status (RESTING on success, REJECTED on failure) is delivered via the orders WS.
+      type: object
+      required:
+      - river_order_id
+      - status
+      title: OrderEditResponse
+      description: Schema for order edit response.
     OrderFillResponse:
       properties:
         river_id:
@@ -1044,6 +890,141 @@ components:
       - is_maker
       title: OrderFillResponse
       description: Schema for a single fill on an order.
+    ConditionalOrderCreate:
+      properties:
+        conditional_order_type:
+          type: string
+          enum:
+          - TP
+          - SL
+          - STOP
+          - REVERSE_STOP
+          description: 'Type of conditional order: TP (take profit), SL (stop loss), or STOP'
+        stop_order_price:
+          anyOf:
+          - type: number
+            exclusiveMaximum: 1.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Stop Order Price
+          description: Activation price for STOP conditional orders. This is the price at which the conditional order triggers and places the trigger_order.
+        trigger_order:
+          $ref: '#/components/schemas/TriggerOrder'
+          description: The order that gets placed when the conditional order activates. For TP/SL this happens after the parent order fills; for STOP this happens when stop_order_price is reached.
+        parent_river_order_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent River Order Id
+          description: Parent order ID (required for TP and SL)
+        parent_complex_order_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Parent Complex Order Id
+          description: Parent complex order ID (for chaining)
+      type: object
+      required:
+      - conditional_order_type
+      - trigger_order
+      title: ConditionalOrderCreate
+      description: Schema for a conditional order (take profit or stop loss) attached to a parent order.
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    TriggerOrder:
+      properties:
+        order_type:
+          type: string
+          enum:
+          - LIMIT
+          - MARKET
+          - RFQ_TAKER
+          description: 'Order type for the triggered order: ''LIMIT'' or ''MARKET'''
+        qty:
+          type: number
+          exclusiveMinimum: 0.0
+          title: Qty
+          description: Quantity (number of contracts) for the triggered order
+        price:
+          anyOf:
+          - type: number
+            exclusiveMaximum: 1.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Price
+          description: Limit price for the triggered order (between 0 and 1). Required when order_type is LIMIT.
+        buy_flag:
+          type: boolean
+          title: Buy Flag
+          description: 'Direction of the triggered order: true=buy, false=sell'
+        stop_order_price:
+          anyOf:
+          - type: number
+            exclusiveMaximum: 1.0
+            exclusiveMinimum: 0.0
+          - type: 'null'
+          title: Stop Order Price
+          description: 'Price at which the triggered order activates as a stop or reverse stop. Required for SL (stop trigger) and TP MARKET (reverse stop trigger). For SL: triggers when price moves against you. For TP MARKET: triggers when price moves in your favor.'
+      type: object
+      required:
+      - order_type
+      - qty
+      - buy_flag
+      title: TriggerOrder
+      description: 'The order that will be sent to the exchange when the conditional order''s condition is met.
+
+
+        For TP/SL: the parent order fills → the conditional activates → this trigger order is placed.
+
+        For STOP/REVERSE_STOP: the stop_order_price is reached → this trigger order is placed.'
+    OrderQueuePositionResponse:
+      properties:
+        river_order_id:
+          type: string
+          format: uuid
+          title: River Order Id
+          description: River order identifier
+        exchange_order_id:
+          type: string
+          title: Exchange Order Id
+          description: Exchange order ID with the best (minimum) queue priority
+        queue_position:
+          type: number
+          title: Queue Position
+          description: Number of preceding shares in the queue ahead of this order (lower is better priority)
+      type: object
+      required:
+      - river_order_id
+      - exchange_order_id
+      - queue_position
+      title: OrderQueuePositionResponse
+      description: Schema for the queue-position response of an order.
     OrderCreate:
       properties:
         order_type:
@@ -1130,6 +1111,25 @@ components:
       - subaccount_id
       title: OrderCreate
       description: Schema for creating a new order.
+    CancelAllRequest:
+      properties:
+        subaccount_id:
+          type: string
+          format: uuid
+          title: Subaccount Id
+        river_ids:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: River Ids
+          description: If set, only cancel open orders for these instruments; otherwise cancel all open orders on the subaccount. Must be either omitted/null or a non-empty list.
+      type: object
+      required:
+      - subaccount_id
+      title: CancelAllRequest
+      description: Request body for cancelling all orders for a subaccount.
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

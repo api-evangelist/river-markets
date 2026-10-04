@@ -129,17 +129,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    FairValueListResponse:
-      properties:
-        fair_values:
-          items:
-            $ref: '#/components/schemas/FairValueResponse'
-          type: array
-          title: Fair Values
-      type: object
-      required:
-      - fair_values
-      title: FairValueListResponse
     FairValueResponse:
       properties:
         subaccount_id:
@@ -163,6 +152,48 @@ components:
       - updated_at
       title: FairValueResponse
       description: A user-set fair value for one instrument on one subaccount.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    FairValueUpsert:
+      properties:
+        subaccount_id:
+          type: string
+          format: uuid
+          title: Subaccount Id
+        river_id:
+          type: integer
+          title: River Id
+        fair_value:
+          type: number
+          maximum: 1.0
+          minimum: 0.0
+          title: Fair Value
+          description: Probability in [0, 1]
+      type: object
+      required:
+      - subaccount_id
+      - river_id
+      - fair_value
+      title: FairValueUpsert
+      description: Request schema for setting a fair value (insert-or-overwrite).
+    FairValueListResponse:
+      properties:
+        fair_values:
+          items:
+            $ref: '#/components/schemas/FairValueResponse'
+          type: array
+          title: Fair Values
+      type: object
+      required:
+      - fair_values
+      title: FairValueListResponse
     ValidationError:
       properties:
         loc:
@@ -189,37 +220,6 @@ components:
       - msg
       - type
       title: ValidationError
-    FairValueUpsert:
-      properties:
-        subaccount_id:
-          type: string
-          format: uuid
-          title: Subaccount Id
-        river_id:
-          type: integer
-          title: River Id
-        fair_value:
-          type: number
-          maximum: 1.0
-          minimum: 0.0
-          title: Fair Value
-          description: Probability in [0, 1]
-      type: object
-      required:
-      - subaccount_id
-      - river_id
-      - fair_value
-      title: FairValueUpsert
-      description: Request schema for setting a fair value (insert-or-overwrite).
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey

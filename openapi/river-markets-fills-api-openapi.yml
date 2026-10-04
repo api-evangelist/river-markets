@@ -108,24 +108,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UserFillListResponse:
-      properties:
-        subaccount_to_fills:
-          items:
-            additionalProperties:
-              anyOf:
-              - type: string
-              - items:
-                  $ref: '#/components/schemas/FillResponse'
-                type: array
-            type: object
-          type: array
-          title: Subaccount To Fills
-      type: object
-      required:
-      - subaccount_to_fills
-      title: UserFillListResponse
-      description: Schema for list of fills for a user.
     FillResponse:
       properties:
         river_id:
@@ -184,6 +166,15 @@ components:
       - is_maker
       title: FillResponse
       description: Schema for fill response.
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -210,15 +201,24 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
+    UserFillListResponse:
       properties:
-        detail:
+        subaccount_to_fills:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            additionalProperties:
+              anyOf:
+              - type: string
+              - items:
+                  $ref: '#/components/schemas/FillResponse'
+                type: array
+            type: object
           type: array
-          title: Detail
+          title: Subaccount To Fills
       type: object
-      title: HTTPValidationError
+      required:
+      - subaccount_to_fills
+      title: UserFillListResponse
+      description: Schema for list of fills for a user.
   securitySchemes:
     SignedRequestKeyId:
       type: apiKey
