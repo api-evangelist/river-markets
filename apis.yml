@@ -291,6 +291,8 @@ apis:
   humanURL: https://docs.rivermarkets.com
   baseURL: https://api.rivermarkets.com
   tags:
+  - Order Book
+  tags_raw:
   - Order Books
   properties:
   - type: OpenAPI
